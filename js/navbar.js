@@ -4,5 +4,5 @@ export function loadNavbar() {
     .then((html) => {
       document.getElementById("navbar-container").innerHTML = html;
     })
-    .catch((error) => console.error("Error loading navbar:", error));
+    .catch((error) => console.error("Error loading nav:", error));
 }

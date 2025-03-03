@@ -1,1 +1,1 @@
-const bookingSlots = {};
+const bookingSlot = {};
