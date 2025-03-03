@@ -1,0 +1,41 @@
+name: Update JIRA Issue on PR Events
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, closed]
+
+jobs:
+  update-jira:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract JIRA Issue Key
+        id: extract-key
+        run: |
+          ISSUE_KEY=$(echo "${{ github.event.pull_request.title }}" | grep -oE '[A-Z]+-[0-9]+')
+          echo "JIRA_ISSUE_KEY=$ISSUE_KEY" >> $GITHUB_ENV
+
+      - name: Comment on JIRA Issue
+        uses: atlassian/gajira-comment@v3
+        with:
+          issue: "${{ env.JIRA_ISSUE_KEY }}"
+          comment: "Pull request ${{ github.event.pull_request.html_url }} has been updated."
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+
+      - name: Transition JIRA Issue to Done (on PR Merge)
+        if: github.event.pull_request.merged == true
+        uses: atlassian/gajira-transition@v3
+        with:
+          issue: "${{ env.JIRA_ISSUE_KEY }}"
+          transition: "Done"
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
