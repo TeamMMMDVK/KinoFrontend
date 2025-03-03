@@ -1,0 +1,12 @@
+jira:
+  baseUrl: ${{ secrets.JIRA_BASE_URL }}
+  userEmail: ${{ secrets.JIRA_USER_EMAIL }}
+  apiToken: ${{ secrets.JIRA_API_TOKEN }}
+
+comment:
+  enabled: true
+  template: "Pull request {{ pullRequestUrl }} has been updated."
+
+transition:
+  enabled: true
+  onMerge: "Done"
