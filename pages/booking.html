@@ -3,16 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Booking Page</title>
+    <link rel="stylesheet" href="/css/booking.css" />
+
   </head>
   <body>
     <div id="navbar-container"></div>
-    <h1>Welcome to My Website</h1>
 
-    <script type="module">
-      import { loadNavbar } from "../js/navbar.js";
-      loadNavbar();
-    </script>
+    <div class="booking-container">
+      <h1>Book tickets for '${movieTitle}'</h1>
+
+      <div class="movie-selection">
+        <label for="movie">Debug select movie:</label>
+        <select id="movie">
+          <option value="12">Avengers: Endgame - 12 kr</option>
+          <option value="10">Joker - 10 kr</option>
+          <option value="8">Parasite - 8 kr</option>
+        </select>
+      </div>
+
+      <div class="screen"></div>
+      <div class="screen-label">SCREEN</div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-box seat-available"></div>
+          <span>Available</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box seat-selected"></div>
+          <span>Selected</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box seat-unavailable"></div>
+          <span>Unavailable</span>
+        </div>
+      </div>
+
+      <div class="seats-container" id="seats-container">
+      </div>
+
+      <div class="summary">
+        <p>You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span></p>
+      </div>
+
+      <button id="book-button">Book Tickets</button>
+    </div>
+
+
   </body>
 </html>
