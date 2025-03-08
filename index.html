@@ -3,21 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home</title>
+    <title>Movie Booking SPA</title>
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="navbar-container"></div>
-    <h1>Welcome to Movie Portal</h1>
-    <div id="movies-container"></div>
+    <body>
+      <nav>
+          <a href="/" data-link>Home</a>
+          <a href="/about" data-link>About</a>
+          <a href="/book" data-link>Book debug</a>
+      </nav>
+
+      <main id="app"></main>
 
 
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="./src/js/components/booking.js"></script>
 
-    <script type="module">
-      import { loadNavbar } from "../js/navbar.js";
-      import { loadMovies } from "../js/movies.js";
-      loadNavbar();
-      loadMovies();
-    </script>
+
   </body>
 </html>
