@@ -1,6 +1,8 @@
 import booking from "./js/views/book.js";
+import HomeView from "./js/views/home.js";
 
 const routes = {
+  "/": { title: "Home", render: HomeView },
   "/book": { title: "Booking", render: booking },
 };
 
