@@ -1,0 +1,61 @@
+/* ---------- Global Styling ---------- */
+body,
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* ---------- Navigation Styling ---------- */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 1em 0;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+  color: #333;
+  text-decoration: none;
+  padding: 1em 1.5em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+nav a:hover {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+nav a.active {
+  background-color: #222;
+  color: white;
+}
+
+/* ---------- View Content Styling ---------- */
+.view-content {
+  display: none;
+  max-width: 900px;
+  margin: auto;
+  padding: 100px 2em 2em;
+}
+
+.view-content.active {
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .view-content {
+    padding-top: 120px;
+  }
+}
