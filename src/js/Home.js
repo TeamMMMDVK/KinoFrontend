@@ -60,6 +60,7 @@ function iterateMovieList(movies) {
         buyTicketButton.addEventListener('click', () => {
             localStorage.setItem("movieID", data.movieID)
             location.hash = redirect
+            window.location.reload()
 
         } )
 
