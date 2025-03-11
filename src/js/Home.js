@@ -8,6 +8,10 @@ let trailerLink = document.getElementById("trailerLink")
 let anmeldelserLink = document.getElementById("anmeldelserLink")
 let movieContainer = document.getElementById("movieContainer")
 let redirect = "#show"
+
+let navigationContainer = document.getElementById("mainNavigation")
+console.log(navigationContainer)
+
 function getDateRange() {
     let today = new Date();
     let futureDate = new Date();
@@ -22,6 +26,23 @@ function getDateRange() {
     console.log(today.getTime())
 
 }
+
+function adminLogin(){
+    let adminDiv = document.createElement("div");
+
+    let adminLoginButton = document.createElement("button")
+    adminLoginButton.innerHTML = "Admin Login"
+    adminLoginButton.href = "#admin";
+    console.log("REDIRECT HREF:", "#admin")
+    adminLoginButton.addEventListener('click', () => {
+        localStorage.setItem("Role", "ADMIN")
+        location.hash = "#admin"
+
+    } )
+    adminDiv.appendChild(adminLoginButton)
+    navigationContainer.appendChild(adminDiv)
+}
+
 async function fetchMoviesInSpecificPeriod() {
     const data = await fetch (url);
     const response = await data.json();
@@ -95,3 +116,4 @@ function iterateMovieList(movies) {
 
 
 fetchMoviesInSpecificPeriod()
+adminLogin()
