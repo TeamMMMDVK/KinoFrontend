@@ -1,5 +1,6 @@
 //const url = "http://localhost:8080/api/v1/show/1?startDate=2025-03-10T14:30:00&endDate=2025-03-16T21:30:00"
 
+let redirect = "#booking"
 
 let movieIDFromStorage = localStorage.getItem("movieID")
 const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=2025-03-10T14:30:00&endDate=2025-03-16T21:30:00`
@@ -19,6 +20,7 @@ async function fetchShows() {
 }
 function presentShows(shows) {
     shows.forEach(show => {
+        console.log(show)
         let showDiv = document.createElement("div");
 /*
         let showTitle = document.createElement("div");
@@ -48,6 +50,8 @@ function presentShows(shows) {
         showDateDiv.appendChild(showTime)
         showTime.addEventListener('click',() => {
             localStorage.setItem("showID", showID)
+            location.hash = redirect
+            window.location.reload()
         })
 
 
