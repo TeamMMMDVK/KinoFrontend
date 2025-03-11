@@ -12,6 +12,7 @@ async function fetchSeatsInTheater() {
   const response = await fetch(fetchSeatsUrl);
   const seats = await response.json();
   console.log("booking res", seats);
+  fetchBookedSeats()
 
   let lastRow = 0;
   seats.forEach(seat => {
@@ -62,6 +63,7 @@ async function fetchBookedSeats() {
       console.log("Updating seat:", seat.seatID);
       seatDiv.classList.remove("available");
       seatDiv.classList.add("booked");
+      //TODO find ud af hvorfor, den ikke altid viser det booked seat ved reload
     }
   });
 
