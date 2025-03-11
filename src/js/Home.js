@@ -1,35 +1,34 @@
-//const url = "http://localhost:8080/api/v1/movie/inshow?startDate=2025-03-10T14:30:00&endDate=2025-03-16T22:30:00";
-const url = "http://localhost:8080/api/v1/movie/inshow?startDate=2025-03-10T14:30:00&endDate=2025-03-16T22:30:00";
-console.log(url); //TODO: Ret url med Date objekt.
-let movieTitle = document.getElementById("movieTitle")
-let movieDescription = document.getElementById("movieDescription")
-let moviePicture = document.getElementById("moviePicture")
-let trailerLink = document.getElementById("trailerLink")
-let anmeldelserLink = document.getElementById("anmeldelserLink")
+const url = "http://localhost:8080/api/v1/movie/inshow" //Normale endpoint uden params
+
+
 let movieContainer = document.getElementById("movieContainer")
 let redirect = "#show"
-function getDateRange() {
-    let today = new Date();
+function getDateRangeForEndpointUrl() {
+    let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og 7 dage ud i fremtiden.
     let futureDate = new Date();
 
-    futureDate.setDate(today.getDate() + 7); // Add 7 days to today
+    futureDate.setDate(today.getDate() + 7);
 
-    // Format dates as YYYY-MM-DD
-    let todayFormatted = today.toISOString();
-    let futureFormatted = futureDate.toISOString();
-
-    console.log({ today: todayFormatted, future: futureFormatted }) ;
-    console.log(today.getTime())
+    let todayFormatted = today.toISOString().slice(0,-1);
+    let futureFormatted = futureDate.toISOString().slice(0,-1); //Vi danner vores date objekter til rette format, så det kan accepteres som param. Slice -1 fjerner bare sidste char "Z"
+    return `${url}?startDate=${todayFormatted}&endDate=${futureFormatted}` //Returnerer færdige URL
 
 }
+
 async function fetchMoviesInSpecificPeriod() {
+    let url = getDateRangeForEndpointUrl() //Henter dynamiske url
+    try {
     const data = await fetch (url);
     const response = await data.json();
+
     iterateMovieList(response);
-    console.log(response)
+    }catch (error) {
+        console.error(error)
+    }
+
 }
 function iterateMovieList(movies) {
-    console.log("size", movies.length)
+
     movies.forEach(data => {
         let movieDiv = document.createElement("div");
         movieDiv.classList.add("movie");
@@ -41,57 +40,39 @@ function iterateMovieList(movies) {
         movieDescription.innerHTML = data.description;
 
         let moviePicture = document.createElement("img");
-        moviePicture.src = data.image?.image || data.image; // Ensure correct path
+        moviePicture.src = data.image?.image || data.image;
 
         let trailerLink = document.createElement("a");
         trailerLink.href = data.trailerLink;
         trailerLink.innerHTML = "Watch Trailer";
         trailerLink.target = "_blank";
 
-        let anmeldelserLink = document.createElement("a");
-        anmeldelserLink.href = data.reviewLink;
-        anmeldelserLink.innerHTML = "Read Reviews";
-        anmeldelserLink.target = "_blank";
+        let reviewLinks = document.createElement("a");
+        reviewLinks.href = data.reviewLink;
+        reviewLinks.innerHTML = "Read Reviews";
+        reviewLinks.target = "_blank";
 
         let buyTicketButton = document.createElement("button")
         buyTicketButton.innerHTML = "Buy Ticket"
         buyTicketButton.href = redirect;
-        console.log("REDIRECT HREF:",redirect)
-        buyTicketButton.addEventListener('click', () => {
+
+        buyTicketButton.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"
             localStorage.setItem("movieID", data.movieID)
             location.hash = redirect
 
         } )
 
-        // Append elements to the movie div
+        // Alt bliver tilføjet til vores "hoveddiv"
         movieDiv.appendChild(movieTitle);
         movieDiv.appendChild(movieDescription);
         movieDiv.appendChild(moviePicture);
         movieDiv.appendChild(trailerLink);
-        movieDiv.appendChild(anmeldelserLink);
+        movieDiv.appendChild(reviewLinks);
         movieDiv.appendChild(buyTicketButton)
 
-        // Append movieDiv to the movieContainer
+        // Vores "hoveddiv" appendes til vores container i vores index.html
         movieContainer.appendChild(movieDiv);
     });
-
-
-
-    /*
-   movies.forEach(data => {
-
-       movieTitle.innerHTML = data.title;
-       movieDescription.innerHTML = data.description
-       moviePicture.src = data.image.image
-       trailerLink.innerHTML = data.trailerLink
-       anmeldelserLink.innerHTML = data.reviewLink
-       let movieDiv = document.createElement("div")
-       movieDiv.classList.add("movie")
-       movieContainer.appendChild(movieDiv)
-   })
-
-     */
 }
-
 
 fetchMoviesInSpecificPeriod()
