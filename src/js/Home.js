@@ -49,6 +49,23 @@ function iterateMovieList(movies) {
         // Append movieDiv to the movieContainer
         movieContainer.appendChild(movieDiv);
     });
+    function getDateRange() {
+        let today = new Date();
+        let futureDate = new Date();
+
+        futureDate.setDate(today.getDate() + 7); // Add 7 days to today
+
+        // Format dates as YYYY-MM-DD
+        let todayFormatted = today.toISOString();
+        let futureFormatted = futureDate.toISOString();
+
+        console.log({ today: todayFormatted, future: futureFormatted }) ;
+        console.log(today.getTime())
+
+    }
+// Example usage
+    console.log(getDateRange());
+
     /*
    movies.forEach(data => {
 
