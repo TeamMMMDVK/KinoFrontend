@@ -1,13 +1,27 @@
+//const url = "http://localhost:8080/api/v1/movie/inshow?startDate=2025-03-10T14:30:00&endDate=2025-03-16T22:30:00";
 const url = "http://localhost:8080/api/v1/movie/inshow?startDate=2025-03-10T14:30:00&endDate=2025-03-16T22:30:00";
-console.log(url);
+console.log(url); //TODO: Ret url med Date objekt.
 let movieTitle = document.getElementById("movieTitle")
 let movieDescription = document.getElementById("movieDescription")
 let moviePicture = document.getElementById("moviePicture")
 let trailerLink = document.getElementById("trailerLink")
 let anmeldelserLink = document.getElementById("anmeldelserLink")
 let movieContainer = document.getElementById("movieContainer")
+let redirect = "#show"
+function getDateRange() {
+    let today = new Date();
+    let futureDate = new Date();
 
+    futureDate.setDate(today.getDate() + 7); // Add 7 days to today
 
+    // Format dates as YYYY-MM-DD
+    let todayFormatted = today.toISOString();
+    let futureFormatted = futureDate.toISOString();
+
+    console.log({ today: todayFormatted, future: futureFormatted }) ;
+    console.log(today.getTime())
+
+}
 async function fetchMoviesInSpecificPeriod() {
     const data = await fetch (url);
     const response = await data.json();
@@ -39,32 +53,29 @@ function iterateMovieList(movies) {
         anmeldelserLink.innerHTML = "Read Reviews";
         anmeldelserLink.target = "_blank";
 
+        let buyTicketButton = document.createElement("button")
+        buyTicketButton.innerHTML = "Buy Ticket"
+        buyTicketButton.href = redirect;
+        console.log("REDIRECT HREF:",redirect)
+        buyTicketButton.addEventListener('click', () => {
+            localStorage.setItem("movieID", data.movieID)
+            location.hash = redirect
+
+        } )
+
         // Append elements to the movie div
         movieDiv.appendChild(movieTitle);
         movieDiv.appendChild(movieDescription);
         movieDiv.appendChild(moviePicture);
         movieDiv.appendChild(trailerLink);
         movieDiv.appendChild(anmeldelserLink);
+        movieDiv.appendChild(buyTicketButton)
 
         // Append movieDiv to the movieContainer
         movieContainer.appendChild(movieDiv);
     });
-    function getDateRange() {
-        let today = new Date();
-        let futureDate = new Date();
 
-        futureDate.setDate(today.getDate() + 7); // Add 7 days to today
 
-        // Format dates as YYYY-MM-DD
-        let todayFormatted = today.toISOString();
-        let futureFormatted = futureDate.toISOString();
-
-        console.log({ today: todayFormatted, future: futureFormatted }) ;
-        console.log(today.getTime())
-
-    }
-// Example usage
-    console.log(getDateRange());
 
     /*
    movies.forEach(data => {
