@@ -11,9 +11,7 @@ const showContainer = document.getElementById("showContainer")
 console.log("Show script")
 async function fetchShows() {
     const data = await fetch(url);
-    //console.log("url",url)
     const response = await data.json();
-    //console.log("response",response)
     presentShows(response)
 }
 function presentShows(shows) {

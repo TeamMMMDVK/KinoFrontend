@@ -17,12 +17,9 @@ function getDateRangeForEndpointUrl() {
     let futureFormatted = futureDate.toISOString().slice(0,-1); //Vi danner vores date objekter til rette format, så det kan accepteres som param. Slice -1 fjerner bare sidste char "Z"
     sessionStorage.setItem("startDate", todayFormatted); //Gemmer i session, så vi ikke gemmer DATETIME i længere tid end nødvendigt.
     sessionStorage.setItem("endDate", futureFormatted);
-
-    //return `${url}?startDate=${todayFormatted}&endDate=${futureFormatted}` //Returnerer færdige URL
 }
 
 async function fetchMoviesInSpecificPeriod() {
-    //let url = getDateRangeForEndpointUrl() //Henter dynamiske url
     try {
     const data = await fetch (url);
     const response = await data.json();
