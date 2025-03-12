@@ -16,6 +16,8 @@
       <a href="#home" class="view-link">Home</a>
       <a href="#show" class="view-link">Shows</a>
       <a href="#booking" class="view-link">Booking</a>
+      <a href="#success" class="view-link">Success</a>
+
     </nav>
 
     <!-- Main Content -->
@@ -46,18 +48,23 @@
         <div id="bookingContainer" class="booking-container"></div>
         <form id="bookForm" action="" method="post">
           <label for="customerName">Name</label>
-          <input type="text" name="customerName" id="customerName">
+          <input type="text" name="customerName" id="customerName" required>
           <label for="customerEmail">Email</label>
-          <input type="text" name="customerEmail" id="customerEmail">
-          <select id="ticketId" name="ticketId">
-            <option value="1">Voksen</option>
-            <option value="2">Student</option>
-            <option value="3">Barn</option>
-          </select>
+          <input type="text" name="customerEmail" id="customerEmail" required>
+
         </form>
         <button id="book-button">Book</button>
         <script src="js/booking.js" type="module"></script>
 
+      </section>
+
+
+      <section id="success" class="view-content">
+        <header>
+          <h2>Success</h2>
+        </header>
+        <div id="successContainer" class="success-container"></div>
+        <script type="module" src="js/success.js"></script>
       </section>
 
     </main>

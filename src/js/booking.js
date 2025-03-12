@@ -10,7 +10,7 @@ console.log(showId)
 
 async function fetchSeatsInTheater() {
   const response = await fetch(fetchSeatsUrl);
-  const seats = await response.json();
+  const seats = await response.json()
 
   let lastRow = 0;
   seats.forEach(seat => {
@@ -28,7 +28,7 @@ async function fetchSeatsInTheater() {
     }
 
     const seatDiv = document.createElement("div");
-    seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`);
+    seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`);
 
 
     if (seat.blocked) {
@@ -65,26 +65,29 @@ async function fetchBookedSeats() {
 function sendBooking() {
     const selectedSeats = document.querySelectorAll(".selected");
     const seatIDs = [];
+    const seatTypes = []
 
-    const customerName = document.getElementById("customerName").outerText
+    const customerName = document.getElementById("customerName")
     const customerEmail = document.getElementById("customerEmail")
-    const ticketId = document.getElementById("ticketId")
+
 
 
     selectedSeats.forEach(seat => {
         const seatID = seat.classList[3].split("seatId-")[1]
+        const seatType = seat.classList[4].split("seatType-")[1]
         seatIDs.push(seatID);
+        seatTypes.push(seatType)
     });
     console.log("Selected seats:", seatIDs);
 
     const bookingUrl = `http://localhost:8080/api/v1/reservation`;
   console.log(bookingUrl)
     const bookingData = {
-      customerName: customerName,
-      customerEmail: customerEmail.innerText,
+      customerName: customerName.value,
+      customerEmail: customerEmail.value,
       showID: showId,
       seatsIDs: seatIDs,
-      ticketIDs: [ticketId.innerText]
+      ticketIDs: seatTypes
     };
 
   console.log(bookingData)
@@ -98,14 +101,10 @@ function sendBooking() {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                console.log("Success:", data);
-                alert("Booking successful!");
-                window.location.reload()
-            } else {
-                console.error("Error:", data);
-                alert("Booking failed!");
-            }
+            console.log(data)
+           localStorage.setItem("successObj",JSON.stringify(data))
+            location.hash = "#success"
+            window.location.reload()
         })
 }
 
