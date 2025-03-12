@@ -147,17 +147,3 @@ h2 {
   background-color: #0056b3;
 }
 
-#more-shows {
-  position: fixed;      /* Sørger for at knappen er fast på skærmen */
-  top: 20px;            /* Afstand fra toppen */
-  right: 20px;          /* Afstand fra højre kant */
-  padding: 8px 16px;    /* Lidt indvendig polstring for at gøre knappen lille */
-  font-size: 14px;      /* Mindre tekst for en lille knap */
-  background-color: #007bff; /* Blå baggrundsfarve */
-  color: white;         /* Hvid tekst */
-  border: none;         /* Fjern kantlinjen */
-  border-radius: 5px;   /* Rundede hjørner */
-  cursor: pointer;      /* Gør det klart, at det er en knap */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lidt skygge for at få den til at poppe */
-  transition: background-color 0.3s, transform 0.3s; /* Blød overgang ved hover */
-}
