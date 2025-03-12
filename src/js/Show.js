@@ -58,6 +58,7 @@ function presentShows(shows) {
             timeButton.addEventListener("click", () => {
                 localStorage.setItem("showID", show.showID);
                 localStorage.setItem("theaterID", show.theaterID)
+                localStorage.setItem("showTime", show.time)
                 location.hash = redirect
                 window.location.reload()
             });
