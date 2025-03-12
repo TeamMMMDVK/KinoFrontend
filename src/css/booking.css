@@ -75,6 +75,10 @@
   pointer-events: none;
 }
 
+.seat.blocked {
+  background-color: #f1c40f;
+  pointer-events: none;
+}
 /* Booking Info - Side Section */
 .booking-info {
   flex: 1;
