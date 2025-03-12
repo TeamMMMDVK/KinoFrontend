@@ -1,4 +1,8 @@
-const url = "http://localhost:8080/api/v1/movie/inshow" //Normale endpoint uden params
+getDateRangeForEndpointUrl()
+let todayFormatted = sessionStorage.getItem("startDate")
+let futureFormatted = sessionStorage.getItem("endDate")
+
+const url = `http://localhost:8080/api/v1/movie/inshow?startDate=${todayFormatted}&endDate=${futureFormatted}` //Normale endpoint uden params
 
 
 let movieContainer = document.getElementById("movieContainer")
@@ -14,11 +18,11 @@ function getDateRangeForEndpointUrl() {
     sessionStorage.setItem("startDate", todayFormatted); //Gemmer i session, så vi ikke gemmer DATETIME i længere tid end nødvendigt.
     sessionStorage.setItem("endDate", futureFormatted);
 
-    return `${url}?startDate=${todayFormatted}&endDate=${futureFormatted}` //Returnerer færdige URL
+    //return `${url}?startDate=${todayFormatted}&endDate=${futureFormatted}` //Returnerer færdige URL
 }
 
 async function fetchMoviesInSpecificPeriod() {
-    let url = getDateRangeForEndpointUrl() //Henter dynamiske url
+    //let url = getDateRangeForEndpointUrl() //Henter dynamiske url
     try {
     const data = await fetch (url);
     const response = await data.json();
@@ -76,5 +80,6 @@ function iterateMovieList(movies) {
         movieContainer.appendChild(movieDiv);
     });
 }
+
 
 fetchMoviesInSpecificPeriod()
