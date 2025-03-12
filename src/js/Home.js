@@ -11,7 +11,7 @@ function getDateRangeForEndpointUrl() {
     let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og 7 dage ud i fremtiden.
     let futureDate = new Date();
 
-    futureDate.setDate(today.getDate() + 7);
+    futureDate.setDate(today.getDate() + 6);
 
     let todayFormatted = today.toISOString().slice(0,-1);
     let futureFormatted = futureDate.toISOString().slice(0,-1); //Vi danner vores date objekter til rette format, så det kan accepteres som param. Slice -1 fjerner bare sidste char "Z"

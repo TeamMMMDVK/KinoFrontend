@@ -10,6 +10,7 @@ let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}
 
 const showContainer = document.getElementById("showContainer")
 const movieDetails = document.getElementById("movieDetails")
+const btnNextPeriod = document.getElementById("more-shows")
 
 
 async function fetchShows() {
