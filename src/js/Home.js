@@ -68,8 +68,8 @@ function iterateMovieList(movies) {
 
         // Alt bliver tilføjet til vores "hoveddiv"
         movieDiv.appendChild(movieTitle);
-        movieDiv.appendChild(movieDescription);
         movieDiv.appendChild(moviePicture);
+        movieDiv.appendChild(movieDescription);
         movieDiv.appendChild(trailerLink);
         movieDiv.appendChild(reviewLinks);
         movieDiv.appendChild(buyTicketButton)
