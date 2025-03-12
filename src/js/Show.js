@@ -39,6 +39,7 @@ function presentShows(shows) {
         showTime.addEventListener('click',() => {
             localStorage.setItem("showID", showID)
             localStorage.setItem("theaterID", teaterID)
+            localStorage.setItem("showTime", showTime.innerHTML)
             console.log(teaterID)
             location.hash = redirect
             window.location.reload()
@@ -59,6 +60,7 @@ async function fetchSpecificMovie() {
 }
 
 function presentMovie(movie) {
+    localStorage.setItem("movieObj", JSON.stringify(movie))
     let movieDiv = document.createElement("div");
     movieDiv.classList.add("movie");
 
