@@ -54,6 +54,12 @@ nav a.active {
   display: block;
 }
 
+h2 {
+  font-size: 30px; /* Justér størrelsen efter behov */
+  font-weight: bold; /* Hvis du vil gøre den fed */
+  color: #333; /* Justér farve efter behov */
+}
+
 @media (min-width: 600px) {
   .view-content {
     padding-top: 120px;

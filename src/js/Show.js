@@ -83,11 +83,14 @@ async function fetchSpecificMovie() {
 }
 
 function presentMovie(movie) {
+    let headerTitle = document.querySelector("#show header h2")
+    if(headerTitle) {
+        headerTitle.innerText = movie.title  //sætter overskriften til filmens titel
+    }
+
+
     let movieDiv = document.createElement("div");
     movieDiv.classList.add("movie");
-
-    let movieTitle = document.createElement("h2");
-    movieTitle.innerHTML = movie.title;
 
     let movieDescription = document.createElement("p");
     movieDescription.innerHTML = movie.description;
@@ -105,7 +108,6 @@ function presentMovie(movie) {
     reviewLinks.innerHTML = "Read Reviews";
     reviewLinks.target = "_blank";
 
-    movieDiv.appendChild(movieTitle);
     movieDiv.appendChild(moviePicture);
     movieDiv.appendChild(movieDescription);
     movieDiv.appendChild(trailerLink);
