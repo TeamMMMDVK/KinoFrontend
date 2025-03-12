@@ -84,6 +84,7 @@ async function fetchSpecificMovie() {
 }
 
 function presentMovie(movie) {
+    localStorage.setItem("movieObj", JSON.stringify(movie))
     let headerTitle = document.querySelector("#show header h2")
     if(headerTitle) {
         headerTitle.innerText = movie.title  //sætter overskriften til filmens titel
