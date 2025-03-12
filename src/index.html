@@ -59,10 +59,14 @@
         <form id="bookForm" action="" method="post">
           <label for="customerName">Name</label>
           <input type="text" name="customerName" id="customerName" required>
+
           <label for="customerEmail">Email</label>
-          <input type="text" name="customerEmail" id="customerEmail" required>
+          <input type="email" name="customerEmail" id="customerEmail" required>
+
+          <button id="book-button" type="submit">Book</button>
         </form>
-        <button id="book-button">Book</button>
+
+
         <script src="js/booking.js" type="module"></script>
 
     </section>
@@ -70,8 +74,18 @@
 
       <section id="success" class="view-content">
         <header>
-          <h2>Success</h2>
+          <h2>Receipt</h2>
         </header>
+        <div id="successInfo">
+          <p id="reservationID"></p>
+          <p id="email"></p>
+          <p id="totalPrice"></p>
+          <p id="bookedSeats"></p>
+          <p id="theaterName"></p>
+          <p id="movie"></p>
+          <p id="startTime"></p>
+          <p id="ticketType"></p>
+        </div>
         <div id="successContainer" class="success-container"></div>
         <script type="module" src="js/success.js"></script>
       </section>
