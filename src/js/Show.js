@@ -2,9 +2,9 @@ let movieIDFromStorage = localStorage.getItem("movieID")
 let startDateFromStorage = sessionStorage.getItem("startDate");
 let endDate = sessionStorage.getItem("endDate");
 console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
-
+let redirect = "#booking"
 const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
-console.log(url)
+
 
 const showContainer = document.getElementById("showContainer")
 
@@ -23,6 +23,7 @@ function presentShows(shows) {
         let showDate = document.createElement("p")
         let showTime = document.createElement("button") //TODO: CSS
         let showID = show.showID;
+        let teaterID = show.theaterID;
 
 
         showDate.innerHTML = show.startTime.split("T")[0];
@@ -39,6 +40,10 @@ function presentShows(shows) {
         showDateDiv.appendChild(showTime)
         showTime.addEventListener('click',() => {
             localStorage.setItem("showID", showID)
+            localStorage.setItem("theaterID", teaterID)
+            console.log(teaterID)
+            location.hash = redirect
+            window.location.reload()
         })
 
 

@@ -65,6 +65,7 @@ function iterateMovieList(movies) {
         buyTicketButton.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"
             localStorage.setItem("movieID", data.movieID)
             location.hash = redirect
+            window.location.reload()
 
         } )
 

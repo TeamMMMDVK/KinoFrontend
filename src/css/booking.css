@@ -1,14 +1,4 @@
 /* Booking container */
-.booking-container {
-  width: 90%;
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #2a2a2a;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
 
 /* Booking layout */
 .booking-wrapper {
@@ -85,6 +75,10 @@
   pointer-events: none;
 }
 
+.seat.blocked {
+  background-color: #f1c40f;
+  pointer-events: none;
+}
 /* Booking Info - Side Section */
 .booking-info {
   flex: 1;
@@ -129,4 +123,10 @@
   .seats-and-info {
     flex-direction: column;
   }
+}
+
+.seat-row {
+  display: flex;
+  margin: 5px;
+  gap: 8px;
 }
