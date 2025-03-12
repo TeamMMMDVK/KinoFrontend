@@ -2,8 +2,10 @@
 
 
 let movieIDFromStorage = localStorage.getItem("movieID")
-const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=2025-03-10T14:30:00&endDate=2025-03-16T21:30:00` //TODO: Localstorage
-
+let startDateFromStorage = localStorage.getItem("startDate");
+let endDate = localStorage.getItem("endDate");
+const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
+console.log(url)
 const movieUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}` //TODO: Localstorage
 
 const showContainer = document.getElementById("showContainer")
