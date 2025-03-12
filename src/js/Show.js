@@ -32,6 +32,7 @@ function presentShows(shows) {
         let showDate = document.createElement("p")
         let showTime = document.createElement("button") //TODO: CSS
         let showID = show.showID;
+        let teaterID = show.theaterID;
 
 
         showDate.innerHTML = show.startTime.split("T")[0];
@@ -50,6 +51,8 @@ function presentShows(shows) {
         showDateDiv.appendChild(showTime)
         showTime.addEventListener('click',() => {
             localStorage.setItem("showID", showID)
+            localStorage.setItem("theaterID", teaterID)
+            console.log(teaterID)
             location.hash = redirect
             window.location.reload()
         })

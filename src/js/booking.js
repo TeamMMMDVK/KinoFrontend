@@ -65,6 +65,12 @@ async function fetchBookedSeats() {
 function sendBooking() {
     const selectedSeats = document.querySelectorAll(".selected");
     const seatIDs = [];
+
+    const customerName = document.getElementById("customerName").outerText
+    const customerEmail = document.getElementById("customerEmail")
+    const ticketId = document.getElementById("ticketId")
+
+
     selectedSeats.forEach(seat => {
         const seatID = seat.classList[3].split("seatId-")[1]
         seatIDs.push(seatID);
@@ -74,11 +80,11 @@ function sendBooking() {
     const bookingUrl = `http://localhost:8080/api/v1/reservation`;
   console.log(bookingUrl)
     const bookingData = {
-      customerName: "test",
-      customerEmail: "test56@test.com",
+      customerName: customerName,
+      customerEmail: customerEmail.innerText,
       showID: showId,
       seatsIDs: seatIDs,
-      ticketIDs: [1]
+      ticketIDs: [ticketId.innerText]
     };
 
   console.log(bookingData)
@@ -103,8 +109,7 @@ function sendBooking() {
         })
 }
 
-function renderFormForBooking(){
-
+function formForBooking(){
 }
 
 fetchSeatsInTheater()
