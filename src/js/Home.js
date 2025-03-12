@@ -36,7 +36,7 @@ function iterateMovieList(movies) {
         let movieDiv = document.createElement("div");
         movieDiv.classList.add("movie");
 
-        let movieTitle = document.createElement("h2");
+        let movieTitle = document.createElement("h3");
         movieTitle.innerHTML = data.title;
 
         let movieDescription = document.createElement("p");
