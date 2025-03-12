@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="stylesheet" href="css/booking.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/booking.css"/>
+    <link rel="stylesheet" href="style.css"/>
     <title>SPA Template</title>
-  </head>
+</head>
 
-  <body>
-    <!-- Navigation Bar -->
-    <nav aria-label="Main navigation">
-      <a href="#home" class="view-link">Home</a>
-      <a href="#show" class="view-link">Shows</a>
-      <a href="#booking" class="view-link">Booking</a>
-      <a href="#success" class="view-link">Success</a>
-    </nav>
+<body>
+<!-- Navigation Bar -->
+<nav aria-label="Main navigation">
+    <a href="#home" class="view-link">Home</a>
+    <a href="#show" class="view-link">Shows</a>
+    <a href="#booking" class="view-link">Booking</a>
+    <a href="#success" class="view-link">Success</a>
+</nav>
 
-    <!-- Main Content -->
-    <main>
-      <!-- Each section corresponds to a view -->
-      <section id="home" class="view-content">
+<!-- Main Content -->
+<main>
+    <!-- Each section corresponds to a view -->
+    <section id="home" class="view-content">
         <header>
-          <h2>Home</h2>
+            <h2>Home</h2>
         </header>
 
         <div class="movies-container" id="movieContainer">
         </div>
         <script type="module" src="js/Home.js"></script>
-      </section>
+    </section>
 
-      <section id="show" class="view-content">
+    <section id="show" class="view-content">
         <header>
-          <h2>Show</h2>
+            <h2>Show</h2>
         </header>
-        <div id="showContainer" class="shows-container"></div>
+        <div class="movie-page">
+            <div id="movieDetails" class="movie-details"></div>
+            <div id="showContainer" class="shows-container"></div>
+        </div>
         <script type="module" src="js/Show.js"></script>
-      </section>
 
-      <section id="booking" class="view-content">
+    </section>
+
+    <section id="booking" class="view-content">
         <header>
-          <h2>Booking</h2>
+            <h2>Booking</h2>
         </header>
         <div id="bookingInfo">
           <p id="movieName"></p>
@@ -61,7 +65,7 @@
         <button id="book-button">Book</button>
         <script src="js/booking.js" type="module"></script>
 
-      </section>
+    </section>
 
 
       <section id="success" class="view-content">
@@ -72,9 +76,9 @@
         <script type="module" src="js/success.js"></script>
       </section>
 
-    </main>
+</main>
 
-    <!-- This loads javascript with type = "module" which allows us to use ES6 modules. -->
-    <script src="index.js" type="module"></script>
-  </body>
+<!-- This loads javascript with type = "module" which allows us to use ES6 modules. -->
+<script src="index.js" type="module"></script>
+</body>
 </html>

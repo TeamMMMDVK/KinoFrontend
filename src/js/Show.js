@@ -1,52 +1,76 @@
+console.log("Her er vi i Show script")
 let movieIDFromStorage = localStorage.getItem("movieID")
 let startDateFromStorage = sessionStorage.getItem("startDate");
 let endDate = sessionStorage.getItem("endDate");
 console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
+
 let redirect = "#booking"
 const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
 let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}`
 
 const showContainer = document.getElementById("showContainer")
+const movieDetails = document.getElementById("movieDetails")
+const btnNextPeriod = document.getElementById("more-shows")
 
-console.log("Show script")
+
 async function fetchShows() {
     const data = await fetch(url);
     const response = await data.json();
     presentShows(response)
 }
+
 function presentShows(shows) {
+    //Først opretter vi et tomt groupedShows objekt, hvori vi vil lave et array til hver dato, så tiderne kan gemmes
+    // korrekt under disse
+    const groupedShows = {};
+
+    // Grupperer shows efter dato
     shows.forEach(show => {
-        let showDiv = document.createElement("div");
-        let showDateDiv = document.createElement("div");
-        let showDate = document.createElement("p")
-        let showTime = document.createElement("button") //TODO: CSS
-        let showID = show.showID;
-        let teaterID = show.theaterID;
+        let date = show.startTime.split("T")[0];
+        let time = show.startTime.split("T")[1];
+
+        if (!groupedShows[date]) { //Hvis datoen ikke findes i vores groupedShows objekt, så oprettes et tomt array med datoen
+            groupedShows[date] = [];
+        }
+        groupedShows[date].push({time, showID: show.showID, theaterID: show.theaterID });//Tilføjer tidspunkt, showID og theaterID til datoens array
+    });
+
+    showContainer.innerHTML = ""; // Ryd tidligere indhold i vores showContainer felt i html
+
+    // Opret en div container til rækkerne
+    let gridContainer = document.createElement("div");
+    gridContainer.classList.add("shows-container");
+
+    Object.keys(groupedShows).forEach(date => {
+        let columnDiv = document.createElement("div");
+        columnDiv.classList.add("show-column");
+
+        let dateDiv = document.createElement("div");
+        dateDiv.classList.add("show-date");
+        dateDiv.innerHTML = date;
+
+        columnDiv.appendChild(dateDiv);
+
+        groupedShows[date].forEach(show => {
+            let timeButton = document.createElement("button");
+            timeButton.classList.add("show-time");
+            timeButton.innerHTML = show.time;
+            timeButton.addEventListener("click", () => {
+                localStorage.setItem("showID", show.showID);
+                localStorage.setItem("theaterID", show.theaterID)
+                location.hash = redirect
+                window.location.reload()
+            });
+            columnDiv.appendChild(timeButton);
+        });
+
+        gridContainer.appendChild(columnDiv);
+    });
+
+    showContainer.appendChild(gridContainer);
 
 
-        showDate.innerHTML = show.startTime.split("T")[0];
-        showTime.innerHTML = show.startTime.split("T")[1];
-        let bookShow = document.createElement("a")
-        showDiv.classList.add("column")
-        showDate.classList.add("column")
-        bookShow.href = show.startTime
 
-        showContainer.appendChild(showDiv);
-        showContainer.appendChild(showDateDiv);
-        showContainer.appendChild(bookShow);
-        showDateDiv.appendChild(showDate)
-        showDateDiv.appendChild(showTime)
-        showTime.addEventListener('click',() => {
-            localStorage.setItem("showID", showID)
-            localStorage.setItem("theaterID", teaterID)
-            localStorage.setItem("showTime", showTime.innerHTML)
-            console.log(teaterID)
-            location.hash = redirect
-            window.location.reload()
-        })
-
-
-    })
 }
 
 fetchShows()
@@ -61,11 +85,14 @@ async function fetchSpecificMovie() {
 
 function presentMovie(movie) {
     localStorage.setItem("movieObj", JSON.stringify(movie))
+    let headerTitle = document.querySelector("#show header h2")
+    if(headerTitle) {
+        headerTitle.innerText = movie.title  //sætter overskriften til filmens titel
+    }
+
+
     let movieDiv = document.createElement("div");
     movieDiv.classList.add("movie");
-
-    let movieTitle = document.createElement("h2");
-    movieTitle.innerHTML = movie.title;
 
     let movieDescription = document.createElement("p");
     movieDescription.innerHTML = movie.description;
@@ -83,17 +110,17 @@ function presentMovie(movie) {
     reviewLinks.innerHTML = "Read Reviews";
     reviewLinks.target = "_blank";
 
-    movieDiv.appendChild(movieTitle);
     movieDiv.appendChild(moviePicture);
     movieDiv.appendChild(movieDescription);
     movieDiv.appendChild(trailerLink);
     movieDiv.appendChild(reviewLinks);
 
-    // Vores "hoveddiv" appendes til vores container i vores index.html
-    showContainer.appendChild(movieDiv);
-}
+    movieDetails.appendChild(movieDiv);
 
+}
 fetchSpecificMovie()
+
+
 
 
 
