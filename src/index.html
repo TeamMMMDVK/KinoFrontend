@@ -44,6 +44,17 @@
           <h2>Booking</h2>
         </header>
         <div id="bookingContainer" class="booking-container"></div>
+        <form id="bookForm" action="" method="post">
+          <label for="customerName">Name</label>
+          <input type="text" name="customerName" id="customerName">
+          <label for="customerEmail">Email</label>
+          <input type="text" name="customerEmail" id="customerEmail">
+          <select id="ticketId" name="ticketId">
+            <option value="1">Voksen</option>
+            <option value="2">Student</option>
+            <option value="3">Barn</option>
+          </select>
+        </form>
         <button id="book-button">Book</button>
         <script src="js/booking.js" type="module"></script>
 
