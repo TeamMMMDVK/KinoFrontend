@@ -15,7 +15,6 @@ function showReservation(){
     const resID = getInfoLocalStorage.reservationID //disse værdier kan vi hente direkte fra objektet
     const totalPrice = getInfoLocalStorage.totalPrice
     const resCustomerEmail = getInfoLocalStorage.customerEmail
-    const resCustomer = getInfoLocalStorage.customerName
     const seatsInfo =[] //array til at gemme info om bookede sæder
     let movieTitle = ""
     let playTime = ""
