@@ -1,11 +1,21 @@
 /* ---------- Global Styling ---------- */
+/* === Farvevariabler som kan kaldes i alle css=== */
+:root {
+  --primary-color: #A77464;
+  --secondary-color: #984F4A;
+  --background-color-header: #748067;
+  --background-color-content: #96A08D;
+  --text-color: black;  /* Definerer sort som standard tekstfarve */
+
+}
+
 body,
 html {
   height: 100%;
   padding: 0;
   margin: 0;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
-  background-color: #f9f9f9;
+  background-color: var(--background-color-content);
   color: #222;
   line-height: 1.6;
 }
@@ -19,7 +29,7 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  background: #ffffff;
+  background: var(--background-color-header);
   padding: 1em 0;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
