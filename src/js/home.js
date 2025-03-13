@@ -6,7 +6,6 @@ const url = `http://localhost:8080/api/v1/movie/inshow?startDate=${todayFormatte
 let movieContainer = document.getElementById("movieContainer")
 let redirect = "#show"
 
-
 let navigationContainer = document.getElementById("mainNavigation")
 console.log(navigationContainer)
 
@@ -23,9 +22,7 @@ function getDateRangeForEndpointUrl() {
 }
 
 function adminLogin(){
-    let adminDiv = document.createElement("div");
-
-    let adminLoginButton = document.createElement("button")
+    let adminLoginButton = document.createElement("a")
     adminLoginButton.innerHTML = "Admin Login"
     adminLoginButton.href = "#admin";
     console.log("REDIRECT HREF:", "#admin")
@@ -34,8 +31,7 @@ function adminLogin(){
         location.hash = "#admin"
         window.location.reload()
     } )
-    adminDiv.appendChild(adminLoginButton)
-    navigationContainer.appendChild(adminDiv)
+    navigationContainer.appendChild(adminLoginButton)
 }
 
 async function fetchMoviesInSpecificPeriod() {
