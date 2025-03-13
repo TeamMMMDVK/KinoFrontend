@@ -13,13 +13,17 @@
 
 <body>
 <!-- Navigation Bar -->
-<nav aria-label="Main navigation">
-    <a href="#home" class="view-link">Home</a>
-    <a href="#show" class="view-link">Shows</a>
-    <a href="#booking" class="view-link">Booking</a>
-    <a href="#success" class="view-link">Success</a>
-    <a href="#create-movie" class="view-link">Create Movie</a>
-</nav>
+<section id="nav">
+    <nav aria-label="Main navigation">
+        <div id="mainNavigation">
+            <a href="#home" class="view-link">Home</a>
+            <a href="#show" class="view-link">Shows</a>
+            <a href="#booking" class="view-link">Booking</a>
+            <a href="#success" class="view-link">Success</a>
+<!--            <a href="#create-movie" class="view-link">Create Movie</a>-->
+        </div>
+    </nav>
+</section>
 
 <!-- Main Content -->
 <main>
@@ -51,16 +55,11 @@
             <h2>Booking</h2>
         </header>
         <div id="bookingContainer" class="booking-container"></div>
-
-
-
         <script src="js/booking.js" type="module"></script>
-
-
     </section>
 
 
-      <section id="success" class="view-content">
+    <section id="success" class="view-content">
         <header>
           <h2>Receipt</h2>
         </header>
@@ -76,6 +75,18 @@
         <script type="module" src="js/CreateMovie.js"></script>
     </section>
 
+    <section id="admin" class="view-content">
+        <header>
+            <h2>Admin dashboard</h2>
+        </header>
+        <div id="adminContainer" class="admin-container"></div>
+        <script type="module" src="js/admin.js"></script>
+    </section>
+
+    <section id="revenue" class="view-content">
+        <div id="revenueContainer" class="revenue-container"></div>
+        <script type="module" src="js/revenue.js"></script>
+    </section>
 </main>
 
 <!-- This loads javascript with type = "module" which allows us to use ES6 modules. -->

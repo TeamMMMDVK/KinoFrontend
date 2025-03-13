@@ -3,10 +3,12 @@ let todayFormatted = sessionStorage.getItem("startDate")
 let futureFormatted = sessionStorage.getItem("endDate")
 
 const url = `http://localhost:8080/api/v1/movie/inshow?startDate=${todayFormatted}&endDate=${futureFormatted}` //Normale endpoint uden params
-
-
 let movieContainer = document.getElementById("movieContainer")
 let redirect = "#show"
+
+let navigationContainer = document.getElementById("mainNavigation")
+console.log(navigationContainer)
+
 function getDateRangeForEndpointUrl() {
     let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og 7 dage ud i fremtiden.
     let futureDate = new Date();
@@ -17,6 +19,19 @@ function getDateRangeForEndpointUrl() {
     let futureFormatted = futureDate.toISOString().slice(0,-1); //Vi danner vores date objekter til rette format, så det kan accepteres som param. Slice -1 fjerner bare sidste char "Z"
     sessionStorage.setItem("startDate", todayFormatted); //Gemmer i session, så vi ikke gemmer DATETIME i længere tid end nødvendigt.
     sessionStorage.setItem("endDate", futureFormatted);
+}
+
+function adminLogin(){
+    let adminLoginButton = document.createElement("a")
+    adminLoginButton.innerHTML = "Admin Login"
+    adminLoginButton.href = "#admin";
+    console.log("REDIRECT HREF:", "#admin")
+    adminLoginButton.addEventListener('click', () => {
+        localStorage.setItem("Role", "ADMIN")
+        location.hash = "#admin"
+        window.location.reload()
+    } )
+    navigationContainer.appendChild(adminLoginButton)
 }
 
 async function fetchMoviesInSpecificPeriod() {
@@ -81,3 +96,5 @@ function iterateMovieList(movies) {
 
 
 fetchMoviesInSpecificPeriod()
+
+adminLogin()
