@@ -16,22 +16,22 @@ function presentMovieForm() {
     <form id="movieFormData" method="POST" enctype="multipart/form-data">
         <div class="createMovieContainer-left">
             <label for="movieTitle">Movie Title:</label>
-            <input type="text" id="movieTitle" name="movieTitle"><br>
+            <input type="text" id="movieTitle" name="movieTitle" required><br>
 
             <label for="movieDescription">Description:</label>
-            <input type="text" id="movieDescription" name="movieDescription"><br>
+            <input type="text" id="movieDescription" name="movieDescription" required><br>
 
             <label for="movieDuration">Duration in min:</label>
-            <input type="number" id="durationInMin" name="durationInMin"><br>
+            <input type="number" id="durationInMin" name="durationInMin" required><br>
 
             <label for="trailerLink">Trailer Link:</label>
-            <input type="text" id="trailerLink" name="trailerLink"><br>
+            <input type="text" id="trailerLink" name="trailerLink" required><br>
 
             <label for="reviewLink">Review Link:</label>
-            <input type="text" id="reviewLink" name="reviewLink"><br>
+            <input type="text" id="reviewLink" name="reviewLink" required><br>
 
             <label for="movieGenre">Genre:</label>
-            <select id="movieGenre" name="Genre">
+            <select id="movieGenre" name="Genre" required>
                 <option value="HORROR">Horror</option>
                 <option value="DRAMA">Drama</option>
                 <option value="ROMANCE">Romance</option>
@@ -45,7 +45,7 @@ function presentMovieForm() {
             </select><br>
 
             <label for="ageRestriction">Age Restriction:</label>
-            <select id="ageRestriction" name="ageRestriction">
+            <select id="ageRestriction" name="ageRestriction" required>
                 <option value="PG_7">PG-7</option>
                 <option value="PG_12">PG-12</option>
                 <option value="PG_16">PG-16</option>
@@ -55,13 +55,13 @@ function presentMovieForm() {
 
         <div class="createMovieContainer-right">
             <label for="movieImageName">Image Name:</label>
-            <input type="text" id="movieImageName" name="image_name"><br>
+            <input type="text" id="movieImageName" name="image_name" required><br>
 
             <label for="movieImage">Upload Image:</label>
-            <input type="file" id="movieImage" name="image"><br>
+            <input type="file" id="movieImage" name="image" required><br>
 
             <label for="imageSaved">Image Saved:</label>
-            <input type="date" id="imageSaved" name="saved"><br>
+            <input type="date" id="imageSaved" name="saved" required><br>
         </div>
 
         <!-- Submit button should be inside the form -->
