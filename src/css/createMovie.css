@@ -1,0 +1,93 @@
+/* Existing styles remain the same */
+.create-movie-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+#movieFormData {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.createMovieContainer-left,
+.createMovieContainer-right {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* New image preview styles */
+.imagePreview {
+    flex: 0 0 100%;
+    margin-top: 1rem;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #fff;
+    border: 2px dashed #ced4da;
+    border-radius: 8px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagePreview p {
+    margin: 0;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.imagePreview img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Existing form element styles remain the same */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+/* Submit button adjustments */
+#submitButton {
+    margin-top: 2rem;
+}
+
+/* Media query remains the same */
+@media (max-width: 768px) {
+    .create-movie-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    #movieFormData {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .imagePreview {
+        margin-top: 0;
+    }
+}
