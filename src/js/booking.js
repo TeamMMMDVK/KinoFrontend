@@ -21,49 +21,46 @@ const fetchBookedSeatsUrl = `http://localhost:8080/api/v1/bookedseat/show/${show
 console.log(showId)
 
 async function fetchSeatsInTheater() {
-  const response = await fetch(fetchSeatsUrl);
-  const seats = await response.json()
+    const response = await fetch(fetchSeatsUrl);
+    const seats = await response.json()
 
-  let lastRow = 0;
-  seats.forEach(seat => {
-    if (seat.seatRow !== lastRow) {
-      lastRow = seat.seatRow;
-      const rowDiv = document.createElement("div");
-      rowDiv.classList.add("seat-row");
+    let lastRow = 0;
+    seats.forEach(seat => {
+        if (seat.seatRow !== lastRow) {
+            lastRow = seat.seatRow;
+            const rowDiv = document.createElement("div");
+            rowDiv.classList.add("seat-row");
 
-      const rowNumber = document.createElement("div");
-      rowNumber.classList.add("row-number");
-      rowNumber.innerHTML = `${seat.seatRow}`;
-      rowDiv.appendChild(rowNumber);
+            const rowNumber = document.createElement("div");
+            rowNumber.classList.add("row-number");
+            rowNumber.innerHTML = `${seat.seatRow}`;
+            rowDiv.appendChild(rowNumber);
 
-      bookingContainer.appendChild(rowDiv);
-    }
+            bookingContainer.appendChild(rowDiv);
+        }
 
-    const seatDiv = document.createElement("div");
-    seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`);
-
-
-    if (seat.blocked) {
-      seatDiv.classList.add("blocked");
-    } else {
-      seatDiv.classList.add("available");
-
-    }
-
-    seatDiv.addEventListener("click", toggleSelected);
+        const seatDiv = document.createElement("div");
+        seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`);
 
 
+        if (seat.blocked) {
+            seatDiv.classList.add("blocked");
+        } else {
+            seatDiv.classList.add("available");
+        }
 
-          bookingContainer.lastChild.appendChild(seatDiv);
-  });
-  fetchBookedSeats()
+        seatDiv.addEventListener("click", toggleSelected);
+
+        bookingContainer.lastChild.appendChild(seatDiv);
+    });
+    fetchBookedSeats()
     generateBookingInfoPanel()
 
 }
 
 
 function toggleSelected() {
-  this.classList.toggle("selected");
+    this.classList.toggle("selected");
     generateBookingInfoPanel();
 }
 
@@ -74,15 +71,15 @@ document.querySelectorAll(".available").forEach(item => {
 
 
 async function fetchBookedSeats() {
-  const response = await fetch(fetchBookedSeatsUrl);
-  const bookedSeats = await response.json();
-  bookedSeats.forEach(seat => {
-    const seatDiv = document.querySelector(`.seatId-${seat.seatID}`);
-    if (seatDiv) {
-      seatDiv.classList.remove("available");
-      seatDiv.classList.add("booked");
-    }
-  });
+    const response = await fetch(fetchBookedSeatsUrl);
+    const bookedSeats = await response.json();
+    bookedSeats.forEach(seat => {
+        const seatDiv = document.querySelector(`.seatId-${seat.seatID}`);
+        if (seatDiv) {
+            seatDiv.classList.remove("available");
+            seatDiv.classList.add("booked");
+        }
+    });
 }
 
 function sendBooking() {
@@ -94,7 +91,6 @@ function sendBooking() {
     const customerEmail = document.getElementById("customerEmail")
 
 
-
     selectedSeats.forEach(seat => {
         const seatID = seat.classList[3].split("seatId-")[1]
         const seatType = seat.classList[4].split("seatType-")[1]
@@ -104,44 +100,54 @@ function sendBooking() {
     console.log("Selected seats:", seatIDs);
 
     const bookingUrl = `http://localhost:8080/api/v1/reservation`;
-  console.log(bookingUrl)
+    console.log(bookingUrl)
     const bookingData = {
-      customerName: customerName.value,
-      customerEmail: customerEmail.value,
-      showID: showId,
-      seatsIDs: seatIDs,
-      ticketIDs: seatTypes
+        customerName: customerName.value,
+        customerEmail: customerEmail.value,
+        showID: showId,
+        seatsIDs: seatIDs,
+        ticketIDs: seatTypes
     };
 
-  console.log(bookingData)
+    console.log(bookingData)
 
     fetch(bookingUrl, {
         method: "POST",
         headers: {
-        "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(bookingData)
     })
         .then(response => response.json())
         .then(data => {
             console.log(data)
-           localStorage.setItem("successObj",JSON.stringify(data))
+            localStorage.setItem("successObj", JSON.stringify(data))
             location.hash = "#success"
             window.location.reload()
         })
 }
+
 function generateBookingInfoPanel() {
-    const getInfoLocalStorage = JSON.parse(localStorage.getItem("movieObj"));
-    const showTime = localStorage.getItem("showTime")
+    const getInfoLocalStorage = JSON.parse(localStorage.getItem("movieObj"))//Når et objekt er blevet gemt i localStorage
+    //bliver det lagret som en string i JSON format. Derfor skal det hentes og parses tilbage inden vi kan hente data fra det
+    const movieTitle = getInfoLocalStorage.title //Nu kan title hentes fra objektet
+    const showDate = localStorage.getItem("Date")
+    const showStartTime = localStorage.getItem("Time")
     const totalSelectedSeats = document.getElementsByClassName("selected").length
     console.log(totalSelectedSeats)
 
-    document.getElementById("movieName").innerText = "Movie: " + (getInfoLocalStorage.title);
+    let headerTitle = document.querySelector("#booking header h2")
+    if(headerTitle) {
+        headerTitle.innerText = `${movieTitle} - ${showDate} - ${showStartTime}`  //sætter overskriften til filmens titel, dato og valgt tid
+    }
+
+    //document.getElementById("movieName").innerText = "Movie: " + (getInfoLocalStorage.title);
     document.getElementById("playtime").innerText = "Duration: " + (getInfoLocalStorage.durationMin) + " minutes";
     document.getElementById("date").innerText = "Show starts: " + showTime;
     document.getElementById("seats").innerText = "Seats selected: " + totalSelectedSeats;
     document.getElementById("price").innerText = "Total price: " + 100 * totalSelectedSeats + " kr";
 }
+
 fetchSeatsInTheater()
 
 

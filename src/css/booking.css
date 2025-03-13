@@ -80,9 +80,9 @@
   pointer-events: none;
 }
 /* Booking Info - Side Section */
-.booking-info {
+#bookingInfo {
   flex: 1;
-  background: #1e1e1e;
+  background: var(--background-color-header);
   color: white;
   padding: 20px;
   border-radius: 8px;
@@ -91,27 +91,9 @@
   min-width: 200px;
 }
 
-.booking-info p {
+#bookingInfo p {
   font-size: 16px;
   margin-bottom: 10px;
-}
-
-/* Booking button */
-#book-button {
-  margin-top: 15px;
-  padding: 12px 24px;
-  font-size: 18px;
-  font-weight: bold;
-  background: #008cff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  width: 100%;
-}
-
-#book-button:hover {
-  background: #0076ff;
 }
 
 /* Responsive Fix */

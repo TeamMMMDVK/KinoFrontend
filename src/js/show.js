@@ -15,7 +15,7 @@ let endDate = sessionStorage.getItem("endDate");
 console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
 
 let redirect = "#booking"
-const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
+const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}`
 let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}`
 
 const showContainer = document.getElementById("showContainer")
@@ -42,12 +42,12 @@ function presentShows(shows) {
         if (!groupedShows[date]) { //Hvis datoen ikke findes i vores groupedShows objekt, så oprettes et tomt array med datoen
             groupedShows[date] = [];
         }
-        groupedShows[date].push({time, showID: show.showID, theaterID: show.theaterID });//Tilføjer tidspunkt, showID og theaterID til datoens array
+        groupedShows[date].push({time, date, showID: show.showID, theaterID: show.theaterID });//Tilføjer tidspunkt, showID og theaterID til datoens array
     });
 
     showContainer.innerHTML = ""; // Ryd tidligere indhold i vores showContainer felt i html
 
-    // Opret en div container til rækkerne
+    // Opretter en div container til rækkerne
     let gridContainer = document.createElement("div");
     gridContainer.classList.add("shows-container");
 
@@ -68,6 +68,8 @@ function presentShows(shows) {
             timeButton.addEventListener("click", () => {
                 localStorage.setItem("showID", show.showID);
                 localStorage.setItem("theaterID", show.theaterID)
+                localStorage.setItem("Time", show.time)
+                localStorage.setItem("Date",show.date)
                 location.hash = redirect
                 window.location.reload()
             });
