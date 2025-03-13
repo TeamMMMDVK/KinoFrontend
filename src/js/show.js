@@ -1,8 +1,8 @@
-console.log("Her er vi i Show script")
+//console.log("Her er vi i Show script")
 let movieIDFromStorage = localStorage.getItem("movieID")
 let startDateFromStorage = sessionStorage.getItem("startDate");
 let endDate = sessionStorage.getItem("endDate");
-console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
+//console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
 
 let redirect = "#booking"
 const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
@@ -79,8 +79,8 @@ fetchShows()
 async function fetchSpecificMovie() {
     const data = await fetch(fetchSpecificUrl);
     const response = await data.json();
-    console.log(response);
-    console.log(fetchSpecificUrl);
+    //console.log(response);
+    //console.log(fetchSpecificUrl);
     presentMovie(response);
 }
 
