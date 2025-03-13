@@ -26,6 +26,12 @@ function cleanNavBar() {
         createMovieLink.classList.add("view-link");
         navigationContainer.appendChild(createMovieLink)
 
+        let createShowLink = document.createElement("a");
+        createShowLink.href = "#create-show";
+        createShowLink.innerHTML = "Add new show";
+        createShowLink.classList.add("view-link");
+        navigationContainer.appendChild(createShowLink);
+
         let logoutLink = document.createElement("a");
         logoutLink.innerHTML = "Log out";
         logoutLink.classList.add("view-link");
