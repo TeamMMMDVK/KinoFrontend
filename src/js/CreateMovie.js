@@ -2,9 +2,7 @@ const createMovieContainer = document.getElementById("createMovieContainer");
 const postMovieEndpointUrl = "http://localhost:8080/api/v1/movie/create-movie";
 
 function initMovieFormAndSubmissionHandling() {
-    console.log("FROM initMovieFormAndSubmissionHandling()... Starting presentMovieForm()")
     presentMovieForm()
-    console.log("FROM initMovieFormAndSubmissionHandling()... Starting handleForm()")
     handleForm()
 }
 initMovieFormAndSubmissionHandling()
@@ -89,9 +87,6 @@ function presentMovieForm() {
 
     formDiv.innerHTML = movieForm;
     createMovieContainer.appendChild(formDiv);
-    console.log(document.getElementById("movieFormData"))
-    console.log(document.getElementById("submitButton"))
-    console.log("Movie form added to DOM");
 }
 
 
@@ -100,11 +95,9 @@ function handleForm() {
     const submitButtonConst = document.getElementById("submitButton")
 
     if (movieFormDataConst) {
-        console.log("Inside if movieFormDataConst")
 
         movieFormDataConst.addEventListener('submit', function (event) {
             event.preventDefault();
-            console.log("Submit event triggered");
 
             let imageInput = document.getElementById("movieImage");
             let file = imageInput.files[0];
