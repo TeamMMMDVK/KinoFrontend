@@ -1,17 +1,35 @@
-
 const showId = localStorage.getItem("showID");
 const theaterId = localStorage.getItem("theaterID");
 const bookingContainer = document.getElementById("bookingContainer");
-const bookBtn = document.getElementById("book-button")
+const bookBtn = document.createElement("button")
+bookBtn.id = "book-button"
+
 bookBtn.addEventListener("click", sendBooking)
-let totalSelectedSeats = 0;
 
 const fetchSeatsUrl = `http://localhost:8080/api/v1/theater/${theaterId}/seats`;
 const fetchBookedSeatsUrl = `http://localhost:8080/api/v1/bookedseat/show/${showId}`;
-//console.log(showId)
+const bookingUrl = `http://localhost:8080/api/v1/reservation`;
+
+console.log(showId)
+
+function createScreen(){
+    const screenDiv = document.createElement("div")
+    screenDiv.id = "screen"
+
+    const screenLabel = document.createElement("p")
+    screenLabel.id = "screen-label"
+    screenLabel.innerText = "SCREEN"
+
+    bookingContainer.appendChild(screenLabel)
+    bookingContainer.appendChild(screenDiv)
+
+}
+
 async function fetchSeatsInTheater() {
   const response = await fetch(fetchSeatsUrl);
   const seats = await response.json()
+    createScreen()
+
 
   let lastRow = 0;
   seats.forEach(seat => {
@@ -29,7 +47,7 @@ async function fetchSeatsInTheater() {
     }
 
     const seatDiv = document.createElement("div");
-    seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`);
+    seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`); //TODO fix hardcoded value
 
 
     if (seat.blocked) {
@@ -46,14 +64,14 @@ async function fetchSeatsInTheater() {
           bookingContainer.lastChild.appendChild(seatDiv);
   });
   fetchBookedSeats()
-    generateBookingInfoPanel()
+
 
 }
 
 
 function toggleSelected() {
   this.classList.toggle("selected");
-    generateBookingInfoPanel();
+    calcSelectedSeats()
 }
 
 // Example: Attach event listener to elements with class "available"
@@ -74,7 +92,8 @@ async function fetchBookedSeats() {
   });
 }
 
-function sendBooking() {
+function sendBooking(event) { //event param contains info about click event. Its a event object.
+    event.preventDefault() // Prevents form from reloading the page, because form default behavior is to reload page after form submit.
     const selectedSeats = document.querySelectorAll(".selected");
     const seatIDs = [];
     const seatTypes = []
@@ -92,8 +111,6 @@ function sendBooking() {
     });
     console.log("Selected seats:", seatIDs);
 
-    const bookingUrl = `http://localhost:8080/api/v1/reservation`;
-  console.log(bookingUrl)
     const bookingData = {
       customerName: customerName.value,
       customerEmail: customerEmail.value,
@@ -116,21 +133,47 @@ function sendBooking() {
             console.log(data)
            localStorage.setItem("successObj",JSON.stringify(data))
             location.hash = "#success"
+            console.log("success reloading")
             window.location.reload()
         })
 }
+
+
 function generateBookingInfoPanel() {
     const getInfoLocalStorage = JSON.parse(localStorage.getItem("movieObj"));
     const showTime = localStorage.getItem("showTime")
-    const totalSelectedSeats = document.getElementsByClassName("selected").length
-    console.log(totalSelectedSeats)
 
-    document.getElementById("movieName").innerText = "Movie: " + (getInfoLocalStorage.title);
-    document.getElementById("playtime").innerText = "Duration: " + (getInfoLocalStorage.durationMin) + " minutes";
-    document.getElementById("date").innerText = "Show starts: " + showTime;
-    document.getElementById("seats").innerText = "Seats selected: " + totalSelectedSeats;
-    document.getElementById("price").innerText = "Total price: " + 100 * totalSelectedSeats + " kr";
+    const bookingInfo = document.createElement("div");
+    bookingInfo.id = "bookingInfo";
+    bookingInfo.innerHTML = `
+    <p>Movie: ${getInfoLocalStorage.title}</p>
+    <p>Duration: ${getInfoLocalStorage.durationMin} minutes</p>
+    <p>Show starts: ${showTime}</p>
+    <p id="numOfSelectedSeats">Seats selected: 0</p>
+    <p id="totalPrice">Total price: 0 kr</p>
+    <form id="bookForm" action="" method="post">
+      <label for="customerName">Name</label>
+      <input type="text" name="customerName" id="customerName" required>
+      <label for="customerEmail">Email</label>
+      <input type="email" name="customerEmail" id="customerEmail" required>
+      <button id="book-button" type="submit">Book</button>
+    </form>
+  `;
+
+    bookingContainer.appendChild(bookingInfo);
+    document.getElementById("bookForm").addEventListener("submit", sendBooking);
 }
+
+function calcSelectedSeats() {
+    let totalSelectedSeats = document.getElementsByClassName("selected").length;
+    document.getElementById("numOfSelectedSeats").innerText = "Seats selected: " + totalSelectedSeats;
+    document.getElementById("totalPrice").innerText = "Total price: " + (100 * totalSelectedSeats) + " kr";
+
+    return totalSelectedSeats;
+}
+
 fetchSeatsInTheater()
+generateBookingInfoPanel()
+
 
 
