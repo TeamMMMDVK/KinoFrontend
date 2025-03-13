@@ -1,133 +1,163 @@
-/* Booking container */
-
-/* Booking layout */
+/* ---------- Booking Layout (Enforces Two Columns) ---------- */
 .booking-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Two-column layout: 1/3 for info, 2/3 for booking */
+  gap: 40px;
+  max-width: 1200px;
   width: 100%;
-  gap: 20px;
-}
-
-/* Seats & Info should be side-by-side */
-.seats-and-info {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
+  margin: auto;
+  padding: 2em;
   align-items: flex-start;
-  gap: 20px;
 }
 
-/* Screen representation */
+/* ---------- Left Column: Booking Info ---------- */
+#bookingInfo {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  min-width: 280px;
+  max-width: 350px;
+}
+
+/* Styling for booking details */
+#bookingInfo p {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* ---------- Right Column: Booking Container ---------- */
+.booking-container {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Movie Screen ---------- */
 .screen-label {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
   color: #f1c40f;
+  text-transform: uppercase;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .screen {
   width: 100%;
+  max-width: 600px;
   height: 50px;
-  background: linear-gradient(to bottom, #e0e0e0, #999);
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(to bottom, #ddd, #bbb);
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
 
-/* Seats grid */
-.seats-container {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 12px;
-  padding: 20px;
-  background: #1e1e1e;
-  border-radius: 8px;
-  flex: 2;
-}
-
-/* Seat design */
-.seat {
-  width: 40px;
-  height: 40px;
-  background-color: #444;
-  border-radius: 10px 10px 5px 5px;
+/* ---------- Booking Form ---------- */
+#bookForm {
+  margin-top: 20px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.4);
+  flex-direction: column;
+  gap: 12px;
 }
 
-.seat:hover {
-  background-color: #666;
+#bookForm label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
 }
 
-/* Selected seat */
-.seat.selected {
-  background-color: #1a00ff;
+#bookForm input {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #ffffff;
+  width: 100%;
 }
 
-/* Booked seat */
-.seat.booked {
-  background-color: #d63031;
-  pointer-events: none;
-}
-
-.seat.blocked {
-  background-color: #f1c40f;
-  pointer-events: none;
-}
-/* Booking Info - Side Section */
-.booking-info {
-  flex: 1;
-  background: #1e1e1e;
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  text-align: left;
-  min-width: 200px;
-}
-
-.booking-info p {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-/* Booking button */
 #book-button {
-  margin-top: 15px;
-  padding: 12px 24px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  background: #008cff;
+  background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 5px;
+  padding: 10px;
+  transition: background 0.3s ease;
   width: 100%;
 }
 
 #book-button:hover {
-  background: #0076ff;
+  background-color: #0056b3;
 }
 
-/* Responsive Fix */
-@media (max-width: 768px) {
+/* ---------- Responsive Adjustments (Stack on Small Screens) ---------- */
+@media (max-width: 900px) {
   .booking-wrapper {
-    flex-direction: column;
+    grid-template-columns: 1fr; /* Stacks into one column */
+    gap: 20px;
   }
 
-  .seats-and-info {
-    flex-direction: column;
+  #bookingInfo,
+  .booking-container {
+    width: 100%;
   }
 }
+/* ---------- Seats Grid with Walkways ---------- */
+#bookingContainer {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); /* 8 seats per row */
+  gap: 12px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
 
-.seat-row {
+/* Seat Styling */
+.seat {
+  width: 45px;
+  height: 45px;
+  background-color: #444;
+  border-radius: 8px;
   display: flex;
-  margin: 5px;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
+
+.seat:hover {
+  background-color: #777;
+}
+
+/* Selected Seat */
+.seat.selected {
+  background: #1a73e8;
+}
+
+/* Booked Seat */
+.seat.booked {
+  background: #d9534f;
+  pointer-events: none;
+}
+
 
