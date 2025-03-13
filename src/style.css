@@ -161,6 +161,12 @@ td {
   padding: 10px;
 }
 
+th {
+  background-color: #cbcbcb;
+  border: 1px solid black;
+}
+
 tr:nth-child(even) {
   background-color: #cbcbcb;
 }
+

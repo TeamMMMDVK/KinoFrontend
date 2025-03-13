@@ -32,7 +32,7 @@ function adminLogin(){
     adminLoginButton.addEventListener('click', () => {
         localStorage.setItem("Role", "ADMIN")
         location.hash = "#admin"
-
+        window.location.reload()
     } )
     adminDiv.appendChild(adminLoginButton)
     navigationContainer.appendChild(adminDiv)

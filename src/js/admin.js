@@ -1,23 +1,39 @@
 console.log("we are in admin.js")
 
 let navigationContainer = document.getElementById("mainNavigation")
-console.log(navigationContainer)
+// let adminContainer = document.getElementById("adminContainer")
 let role = localStorage.getItem("Role")
 
-function cleanNavBar(){
-    if(role === "ADMIN"){
-        navigationContainer.innerHTML = ""
+function cleanNavBar() {
+    if (role === "ADMIN") {
+        navigationContainer.innerHTML = "" //clean all the customer links
+
+        let adminLink = document.createElement("a");
+        adminLink.href = "#admin";
+        adminLink.innerHTML = "Dashboard";
+        adminLink.classList.add("view-link");
+        navigationContainer.appendChild(adminLink)
+
         let revenueLink = document.createElement("a");
         revenueLink.href = "#revenue";
         revenueLink.innerHTML = "Revenue";
-        revenueLink.target = "_blank";
         revenueLink.classList.add("view-link");
         navigationContainer.appendChild(revenueLink)
-        const currentHash = location.hash;
-        location.hash = "";
-        location.hash = currentHash;
+
+        let logoutLink = document.createElement("a");
+        logoutLink.innerHTML = "Log out";
+        logoutLink.classList.add("view-link");
+        logoutLink.addEventListener('click', logout)
+        navigationContainer.appendChild(logoutLink)
     }
 }
+
+function logout() {
+    localStorage.removeItem("Role")
+    location.hash = "#home"
+    window.location.reload()
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     cleanNavBar();
 });
