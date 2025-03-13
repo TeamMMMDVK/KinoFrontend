@@ -7,7 +7,7 @@ let totalSelectedSeats = 0;
 
 const fetchSeatsUrl = `http://localhost:8080/api/v1/theater/${theaterId}/seats`;
 const fetchBookedSeatsUrl = `http://localhost:8080/api/v1/bookedseat/show/${showId}`;
-console.log(showId)
+//console.log(showId)
 
 async function fetchSeatsInTheater() {
   const response = await fetch(fetchSeatsUrl);

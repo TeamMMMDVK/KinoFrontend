@@ -1,4 +1,4 @@
-console.log("Router script");
+//console.log("Router script");
 
 function initializeViewNavigation() {
   window.addEventListener("hashchange", handleViewChange);
