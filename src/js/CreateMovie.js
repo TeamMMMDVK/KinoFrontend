@@ -9,6 +9,21 @@ function initMovieFormAndSubmissionHandling() {
 }
 initMovieFormAndSubmissionHandling()
 
+document.getElementById("movieImage").addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewDiv = document.getElementById("imagePreview");
+            previewDiv.innerHTML = `<img src="${e.target.result}" alt="Image Preview" style="max-width:25%; height: auto;">`;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        document.getElementById("imagePreview").innerHTML = `<p>No Image Selected</p>`
+    }
+})
+
+
 function presentMovieForm() {
     let formDiv = document.createElement('div'); // For the movie data
     //     <div class="createMovieContainer">
@@ -63,6 +78,9 @@ function presentMovieForm() {
             <label for="imageSaved">Image Saved:</label>
             <input type="date" id="imageSaved" name="saved" required><br>
         </div>
+        <div id="imagePreview" class="imagePreview">
+            <p>No image selected.</p>
+        </div>
 
         <!-- Submit button should be inside the form -->
         <button type="submit" id="submitButton">Submit</button> 
@@ -75,6 +93,7 @@ function presentMovieForm() {
     console.log(document.getElementById("submitButton"))
     console.log("Movie form added to DOM");
 }
+
 
 function handleForm() {
     const movieFormDataConst = document.getElementById("movieFormData");
