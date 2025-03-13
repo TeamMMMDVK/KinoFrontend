@@ -57,15 +57,18 @@ function iterateMovieList(movies) {
 
         let trailerLink = document.createElement("a");
         trailerLink.href = data.trailerLink;
-        trailerLink.innerHTML = "Watch Trailer";
+        trailerLink.innerHTML = "Trailer";
         trailerLink.target = "_blank";
+        trailerLink.classList.add("button")
 
         let reviewLinks = document.createElement("a");
         reviewLinks.href = data.reviewLink;
-        reviewLinks.innerHTML = "Read Reviews";
+        reviewLinks.innerHTML = "Reviews";
         reviewLinks.target = "_blank";
+        reviewLinks.classList.add("button")
 
         let buyTicketButton = document.createElement("button")
+        buyTicketButton.classList.add("button")
         buyTicketButton.innerHTML = "Buy Ticket"
         buyTicketButton.href = redirect;
 

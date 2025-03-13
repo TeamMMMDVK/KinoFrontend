@@ -63,7 +63,7 @@ function presentShows(shows) {
 
         groupedShows[date].forEach(show => {
             let timeButton = document.createElement("button");
-            timeButton.classList.add("show-time");
+            timeButton.classList.add("button");
             timeButton.innerHTML = show.time;
             timeButton.addEventListener("click", () => {
                 localStorage.setItem("showID", show.showID);
@@ -112,13 +112,15 @@ function presentMovie(movie) {
 
     let trailerLink = document.createElement("a");
     trailerLink.href = movie.trailerLink;
-    trailerLink.innerHTML = "Watch Trailer";
+    trailerLink.innerHTML = "Trailer";
     trailerLink.target = "_blank";
+    trailerLink.classList.add("button")
 
     let reviewLinks = document.createElement("a");
     reviewLinks.href = movie.reviewLink;
-    reviewLinks.innerHTML = "Read Reviews";
+    reviewLinks.innerHTML = "Reviews";
     reviewLinks.target = "_blank";
+    reviewLinks.classList.add("button")
 
     movieDiv.appendChild(moviePicture);
     movieDiv.appendChild(movieDescription);

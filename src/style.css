@@ -5,6 +5,7 @@
   --secondary-color: #984F4A;
   --background-color-header: #748067;
   --background-color-content: #96A08D;
+  --button-color: #5f6955;
   --text-color: black;  /* Definerer sort som standard tekstfarve */
 
 }
@@ -62,6 +63,24 @@ nav a.active {
 
 .view-content.active {
   display: block;
+}
+
+.button {
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 80px;
+  margin: 5px;  /* Tilføjer mellemrum omkring knapperne */
+  display: inline-block; /* Sikrer korrekt placering ved siden af hinanden */
+  text-align: center;
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
 }
 
 h2 {
