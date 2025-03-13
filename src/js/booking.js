@@ -12,9 +12,24 @@ const bookingUrl = `http://localhost:8080/api/v1/reservation`;
 
 console.log(showId)
 
+function createScreen(){
+    const screenDiv = document.createElement("div")
+    screenDiv.id = "screen"
+
+    const screenLabel = document.createElement("p")
+    screenLabel.id = "screen-label"
+    screenLabel.innerText = "SCREEN"
+
+    bookingContainer.appendChild(screenLabel)
+    bookingContainer.appendChild(screenDiv)
+
+}
+
 async function fetchSeatsInTheater() {
   const response = await fetch(fetchSeatsUrl);
   const seats = await response.json()
+    createScreen()
+
 
   let lastRow = 0;
   seats.forEach(seat => {
