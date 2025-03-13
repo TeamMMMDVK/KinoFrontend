@@ -22,8 +22,6 @@ function getDateRangeForEndpointUrl() {
     sessionStorage.setItem("endDate", futureFormatted);
 }
 
-}
-
 function adminLogin(){
     let adminDiv = document.createElement("div");
 

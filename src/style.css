@@ -147,3 +147,20 @@ h2 {
   background-color: #0056b3;
 }
 
+table {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+  height: 100%;
+  table-layout: fixed;
+}
+
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #cbcbcb;
+}
