@@ -1,5 +1,5 @@
 const createMovieContainer = document.getElementById("createMovieContainer");
-const postMovieEndpointUrl = "localhost:8080/api/v1/movie/create-movie"
+const postMovieEndpointUrl = "http://localhost:8080/api/v1/movie/create-movie"
 function presentMovieForm() {
     let formDiv = document.createElement('div') // For the movie data
     //let imageUploadDiv = document.createElement('div') // For the image data
@@ -8,7 +8,7 @@ function presentMovieForm() {
     let movieForm = `
     <div class="createMovieContainer">
         <div class="createMovieContainer-left">
-            <form action=${postMovieEndpointUrl} method="POST" enctype="multipart/form-data">
+            <form id="movieFormData" action=${postMovieEndpointUrl} method="POST" enctype="multipart/form-data">
                 <label for="movieTitle">Movie Title:</label>
                 <input type="text" id="movieTitle" name="movieTitle">
                 <br>
@@ -27,10 +27,6 @@ function presentMovieForm() {
                 
                 <label for="reviewLink">Review Link:</label>
                 <input type="text" id="reviewLink" name="reviewLink">
-                <br>
-                
-                <label for="">Title:</label>
-                <input type="text" id="" name="">
                 <br>
                 
                 <label for="movieGenre">Genre:</label>
@@ -77,6 +73,24 @@ function presentMovieForm() {
     `;
     formDiv.innerHTML = movieForm;
     createMovieContainer.appendChild(formDiv);
+    console.log("Movie form added to dom")
+
+    //POST to Backend
+    const movieFormDataConst = document.getElementById("movieFormData")
+    movieFormDataConst.addEventListener('submit', function(event) {
+        event.preventDefault()
+        console.log("Movie form data listener triggered")
+
+        const formData = new FormData(movieFormDataConst)
+
+        fetch(postMovieEndpointUrl, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error("Error", error))
+    })
 }
 presentMovieForm()
 
