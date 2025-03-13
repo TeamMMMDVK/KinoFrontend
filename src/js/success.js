@@ -45,6 +45,8 @@ function showReservation(){
     document.getElementById("resTotalPrice").innerText = "Total price DKK: " +totalPrice
     document.getElementById("resCustomerEmail").innerText = "Email: " +resCustomerEmail
 
+    console.log("email: ", resCustomerEmail)
+
 
 }
 showReservation()
