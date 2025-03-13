@@ -1,3 +1,13 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/show.css") // CSS fil indlæses når denne JS-fil kører
+
 console.log("Her er vi i Show script")
 let movieIDFromStorage = localStorage.getItem("movieID")
 let startDateFromStorage = sessionStorage.getItem("startDate");

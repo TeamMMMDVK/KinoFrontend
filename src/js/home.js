@@ -1,3 +1,13 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/home.css") // CSS fil indlæses når denne JS-fil kører
+
 getDateRangeForEndpointUrl()
 let todayFormatted = sessionStorage.getItem("startDate")
 let futureFormatted = sessionStorage.getItem("endDate")

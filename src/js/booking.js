@@ -1,3 +1,14 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/booking.css") // CSS fil indlæses når denne JS-fil kører
+
+
 const showId = localStorage.getItem("showID");
 const theaterId = localStorage.getItem("theaterID");
 const bookingContainer = document.getElementById("bookingContainer");
