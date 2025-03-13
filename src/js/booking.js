@@ -1,3 +1,4 @@
+
 const showId = localStorage.getItem("showID");
 const theaterId = localStorage.getItem("theaterID");
 const bookingContainer = document.getElementById("bookingContainer");
@@ -8,7 +9,6 @@ let totalSelectedSeats = 0;
 const fetchSeatsUrl = `http://localhost:8080/api/v1/theater/${theaterId}/seats`;
 const fetchBookedSeatsUrl = `http://localhost:8080/api/v1/bookedseat/show/${showId}`;
 //console.log(showId)
-
 async function fetchSeatsInTheater() {
   const response = await fetch(fetchSeatsUrl);
   const seats = await response.json()
