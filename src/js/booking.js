@@ -1,97 +1,136 @@
-console.log("Booking script");
+const showId = localStorage.getItem("showID");
+const theaterId = localStorage.getItem("theaterID");
+const bookingContainer = document.getElementById("bookingContainer");
+const bookBtn = document.getElementById("book-button")
+bookBtn.addEventListener("click", sendBooking)
+let totalSelectedSeats = 0;
 
-let seatsContainer = document.getElementById("booking-container");
-let countElement = document.getElementById("count");
-let bookButton = document.getElementById("book-button");
-let selectedSeats = [];
+const fetchSeatsUrl = `http://localhost:8080/api/v1/theater/${theaterId}/seats`;
+const fetchBookedSeatsUrl = `http://localhost:8080/api/v1/bookedseat/show/${showId}`;
+console.log(showId)
 
-async function fetchSeatsTheater() {
-  const response = await fetch("http://localhost:8080/api/v1/theater/1/seats");
-  return response.json();
+async function fetchSeatsInTheater() {
+  const response = await fetch(fetchSeatsUrl);
+  const seats = await response.json()
+
+  let lastRow = 0;
+  seats.forEach(seat => {
+    if (seat.seatRow !== lastRow) {
+      lastRow = seat.seatRow;
+      const rowDiv = document.createElement("div");
+      rowDiv.classList.add("seat-row");
+
+      const rowNumber = document.createElement("div");
+      rowNumber.classList.add("row-number");
+      rowNumber.innerHTML = `${seat.seatRow}`;
+      rowDiv.appendChild(rowNumber);
+
+      bookingContainer.appendChild(rowDiv);
+    }
+
+    const seatDiv = document.createElement("div");
+    seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`);
+
+
+    if (seat.blocked) {
+      seatDiv.classList.add("blocked");
+    } else {
+      seatDiv.classList.add("available");
+
+    }
+
+    seatDiv.addEventListener("click", toggleSelected);
+
+
+
+          bookingContainer.lastChild.appendChild(seatDiv);
+  });
+  fetchBookedSeats()
+    generateBookingInfoPanel()
+
 }
+
+
+function toggleSelected() {
+  this.classList.toggle("selected");
+    generateBookingInfoPanel();
+}
+
+// Example: Attach event listener to elements with class "available"
+document.querySelectorAll(".available").forEach(item => {
+    item.addEventListener("click", toggleSelected);
+})
+
 
 async function fetchBookedSeats() {
-  const response = await fetch(
-    "http://localhost:8080/api/v1/bookedseat/show/1"
-  );
-  return response.json();
-}
-
-async function renderSeatDiv() {
-  if (!seatsContainer) return;
-  const { totalAmountOfRows: seatRows, seatsPerRow: seatColumns } =
-    await fetchSeatsTheater();
-  const bookedSeats = await fetchBookedSeats();
-  seatsContainer.innerHTML = "";
-
-  for (let row = 0; row < seatRows; row++) {
-    const rowDiv = document.createElement("div");
-    rowDiv.classList.add("seat-row");
-
-    for (let col = 0; col < seatColumns; col++) {
-      const seatDiv = document.createElement("div");
-      seatDiv.classList.add("seat", `row-${row}`, `col-${col}`);
-
-      const bookedSeat = bookedSeats.find(
-        (seat) =>
-          seat.seatRow === row &&
-          seat.seatNumber === col &&
-          seat.status === "BOOKED"
-      );
-
-      if (bookedSeat) {
-        seatDiv.classList.add("booked");
-        seatDiv.textContent = "Booked";
-      }
-
-      rowDiv.appendChild(seatDiv);
-      seatDiv.addEventListener("click", toggleSelected);
+  const response = await fetch(fetchBookedSeatsUrl);
+  const bookedSeats = await response.json();
+  bookedSeats.forEach(seat => {
+    const seatDiv = document.querySelector(`.seatId-${seat.seatID}`);
+    if (seatDiv) {
+      seatDiv.classList.remove("available");
+      seatDiv.classList.add("booked");
     }
-    seatsContainer.appendChild(rowDiv);
-  }
+  });
 }
 
-function toggleSelected(event) {
-  const seat = event.target;
-  if (seat.classList.contains("selected")) {
-    seat.classList.remove("selected");
-    selectedSeats = selectedSeats.filter((s) => s !== seat);
-  } else if (seat.classList.contains("booked")) {
-    alert("This seat is already booked");
-  } else {
-    seat.classList.add("selected");
-    selectedSeats.push(seat);
-  }
-  countElement.innerText = selectedSeats.length;
-}
+function sendBooking() {
+    const selectedSeats = document.querySelectorAll(".selected");
+    const seatIDs = [];
+    const seatTypes = []
 
-async function bookSeats() {
-  const selectedSeatData = selectedSeats.map((seat) => {
-    const row = parseInt(seat.classList[1].split("-")[1]);
-    const column = parseInt(seat.classList[2].split("-")[1]);
-    return { row, column };
-  });
+    const customerName = document.getElementById("customerName")
+    const customerEmail = document.getElementById("customerEmail")
 
-  const response = await fetch("http://localhost:8080/api/updateseats", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ seats: selectedSeatData }),
-  });
 
-  if (response.ok) {
-    selectedSeats.forEach((seat) => {
-      seat.classList.remove("selected");
-      seat.classList.add("booked");
+
+    selectedSeats.forEach(seat => {
+        const seatID = seat.classList[3].split("seatId-")[1]
+        const seatType = seat.classList[4].split("seatType-")[1]
+        seatIDs.push(seatID);
+        seatTypes.push(seatType)
     });
-    selectedSeats = [];
-    countElement.innerText = "0";
-  } else {
-    alert("Failed to book seats. Please try again.");
-  }
-}
+    console.log("Selected seats:", seatIDs);
 
-if (bookButton) {
-  bookButton.addEventListener("click", bookSeats);
-}
+    const bookingUrl = `http://localhost:8080/api/v1/reservation`;
+  console.log(bookingUrl)
+    const bookingData = {
+      customerName: customerName.value,
+      customerEmail: customerEmail.value,
+      showID: showId,
+      seatsIDs: seatIDs,
+      ticketIDs: seatTypes
+    };
 
-renderSeatDiv();
+  console.log(bookingData)
+
+    fetch(bookingUrl, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bookingData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+           localStorage.setItem("successObj",JSON.stringify(data))
+            location.hash = "#success"
+            window.location.reload()
+        })
+}
+function generateBookingInfoPanel() {
+    const getInfoLocalStorage = JSON.parse(localStorage.getItem("movieObj"));
+    const showTime = localStorage.getItem("showTime")
+    const totalSelectedSeats = document.getElementsByClassName("selected").length
+    console.log(totalSelectedSeats)
+
+    document.getElementById("movieName").innerText = "Movie: " + (getInfoLocalStorage.title);
+    document.getElementById("playtime").innerText = "Duration: " + (getInfoLocalStorage.durationMin) + " minutes";
+    document.getElementById("date").innerText = "Show starts: " + showTime;
+    document.getElementById("seats").innerText = "Seats selected: " + totalSelectedSeats;
+    document.getElementById("price").innerText = "Total price: " + 100 * totalSelectedSeats + " kr";
+}
+fetchSeatsInTheater()
+
+
