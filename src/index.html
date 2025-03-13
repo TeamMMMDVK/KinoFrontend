@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="css/booking.css"/>
     <link rel="stylesheet" href="style.css"/>
-    <title>SPA Template</title>
+    <title>Kino XP</title>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 
         <div class="movies-container" id="movieContainer">
         </div>
-        <script type="module" src="js/Home.js"></script>
+        <script type="module" src="js/home.js"></script>
     </section>
 
     <section id="show" class="view-content">
@@ -40,7 +40,7 @@
             <div id="movieDetails" class="movie-details"></div>
             <div id="showContainer" class="shows-container"></div>
         </div>
-        <script type="module" src="js/Show.js"></script>
+        <script type="module" src="js/show.js"></script>
 
     </section>
 
@@ -48,29 +48,19 @@
         <header>
             <h2>Booking</h2>
         </header>
-        <div id="bookingInfo">
-          <p id="movieName"></p>
-          <p id="playtime"></p>
-          <p id="date"></p>
-          <p id="seats"></p>
-          <p id="price"></p>
-        </div>
         <div id="bookingContainer" class="booking-container"></div>
-        <form id="bookForm" action="" method="post">
-          <label for="customerName">Name</label>
-          <input type="text" name="customerName" id="customerName" required>
-          <label for="customerEmail">Email</label>
-          <input type="text" name="customerEmail" id="customerEmail" required>
-        </form>
-        <button id="book-button">Book</button>
+
+
+
         <script src="js/booking.js" type="module"></script>
+
 
     </section>
 
 
       <section id="success" class="view-content">
         <header>
-          <h2>Success</h2>
+          <h2>Receipt</h2>
         </header>
         <div id="successContainer" class="success-container"></div>
         <script type="module" src="js/success.js"></script>
