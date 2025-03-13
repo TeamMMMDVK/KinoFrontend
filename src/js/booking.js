@@ -24,6 +24,12 @@ async function fetchSeatsInTheater() {
     const response = await fetch(fetchSeatsUrl);
     const seats = await response.json()
 
+    bookingContainer.innerHTML = "" //rydder eksisterende indhold i overordnet bookingContainer
+
+    // Opret seats-container div til css brug
+    const seatsContainer = document.createElement("div");
+    seatsContainer.classList.add("seats-container");
+
     let lastRow = 0;
     seats.forEach(seat => {
         if (seat.seatRow !== lastRow) {
@@ -36,7 +42,7 @@ async function fetchSeatsInTheater() {
             rowNumber.innerHTML = `${seat.seatRow}`;
             rowDiv.appendChild(rowNumber);
 
-            bookingContainer.appendChild(rowDiv);
+            seatsContainer.appendChild(rowDiv);
         }
 
         const seatDiv = document.createElement("div");
@@ -51,8 +57,10 @@ async function fetchSeatsInTheater() {
 
         seatDiv.addEventListener("click", toggleSelected);
 
-        bookingContainer.lastChild.appendChild(seatDiv);
+        seatsContainer.lastChild.appendChild(seatDiv);
     });
+
+    bookingContainer.appendChild(seatsContainer)
     fetchBookedSeats()
     generateBookingInfoPanel()
 
@@ -141,9 +149,8 @@ function generateBookingInfoPanel() {
         headerTitle.innerText = `${movieTitle} - ${showDate} - ${showStartTime}`  //sætter overskriften til filmens titel, dato og valgt tid
     }
 
-    //document.getElementById("movieName").innerText = "Movie: " + (getInfoLocalStorage.title);
+
     document.getElementById("playtime").innerText = "Duration: " + (getInfoLocalStorage.durationMin) + " minutes";
-    document.getElementById("date").innerText = "Show starts: " + showTime;
     document.getElementById("seats").innerText = "Seats selected: " + totalSelectedSeats;
     document.getElementById("price").innerText = "Total price: " + 100 * totalSelectedSeats + " kr";
 }
