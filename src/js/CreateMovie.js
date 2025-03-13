@@ -11,8 +11,8 @@ initMovieFormAndSubmissionHandling()
 
 function presentMovieForm() {
     let formDiv = document.createElement('div'); // For the movie data
+    //     <div class="createMovieContainer">
     let movieForm = `
-    <div class="createMovieContainer">
     <form id="movieFormData" method="POST" enctype="multipart/form-data">
         <div class="createMovieContainer-left">
             <label for="movieTitle">Movie Title:</label>
@@ -75,6 +75,7 @@ function presentMovieForm() {
     console.log(document.getElementById("submitButton"))
     console.log("Movie form added to DOM");
 }
+
 function handleForm() {
     const movieFormDataConst = document.getElementById("movieFormData");
     const submitButtonConst = document.getElementById("submitButton")
