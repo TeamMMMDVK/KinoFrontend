@@ -25,7 +25,7 @@ document.getElementById("movieImage").addEventListener('change', function(event)
 
 
 function presentMovieForm() {
-    let formDiv = document.createElement('div'); // For the movie data
+    let formDiv = document.createElement('div');
     //     <div class="createMovieContainer">
     let movieForm = `
     <form id="movieFormData" method="POST" enctype="multipart/form-data">
