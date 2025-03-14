@@ -36,6 +36,7 @@ function loadSectionScript(view) {
     "#create-movie": "js/CreateMovie.js",
     "#revenue": "js/revenue.js",
     "#admin": "js/admin.js",
+    "#create-show": "js/createShow.js"
   };
 
   if (scriptMapping[view]) {
