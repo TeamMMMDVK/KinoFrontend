@@ -171,3 +171,14 @@ tr:nth-child(even) {
   background-color: #cbcbcb;
 }
 
+.view-link[href="#show"] {
+  display: none;
+}
+
+.view-link[href="#booking"] {
+  display: none;
+}
+
+.view-link[href="#success"] {
+  display: none;
+}
