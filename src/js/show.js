@@ -5,13 +5,31 @@ let endDate = sessionStorage.getItem("endDate");
 //console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
 
 let redirect = "#booking"
-const url = `http://localhost:8080/api/v1/show/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
+const url = `http://localhost:8080/api/v1/show/movie/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
 let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}`
 
 const showContainer = document.getElementById("showContainer")
 const movieDetails = document.getElementById("movieDetails")
 const btnNextPeriod = document.getElementById("more-shows")
+const role = localStorage.getItem("Role")
 
+function addShowButton(){
+    console.log("add new show button")
+
+    if (role === "ADMIN") {
+        let showButtonDiv = document.createElement("div");
+
+        let addShowButton = document.createElement("button");
+        addShowButton.classList.add("show-time");
+        addShowButton.href = "#create-show"
+        addShowButton.innerHTML= "Add new show";
+        addShowButton.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"
+            localStorage.setItem("movieID", movieIDFromStorage)
+        } )
+        showButtonDiv.appendChild(addShowButton)
+        movieDetails.appendChild(showButtonDiv)
+    }
+}
 
 async function fetchShows() {
     const data = await fetch(url);
@@ -120,7 +138,7 @@ function presentMovie(movie) {
 
 }
 fetchSpecificMovie()
-
+addShowButton()
 
 
 

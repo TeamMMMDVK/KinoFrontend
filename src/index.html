@@ -20,7 +20,7 @@
             <a href="#show" class="view-link">Shows</a>
             <a href="#booking" class="view-link">Booking</a>
             <a href="#success" class="view-link">Success</a>
-<!--            <a href="#create-movie" class="view-link">Create Movie</a>-->
+            <!--            <a href="#create-movie" class="view-link">Create Movie</a>-->
         </div>
     </nav>
 </section>
@@ -32,10 +32,7 @@
         <header>
             <h2>Home</h2>
         </header>
-
-        <div class="movies-container" id="movieContainer">
-        </div>
-
+        <div class="movies-container" id="movieContainer"></div>
     </section>
 
     <section id="show" class="view-content">
@@ -46,8 +43,6 @@
             <div id="movieDetails" class="movie-details"></div>
             <div id="showContainer" class="shows-container"></div>
         </div>
-
-
     </section>
 
     <section id="booking" class="view-content">
@@ -55,42 +50,35 @@
             <h2>Booking</h2>
         </header>
         <div id="bookingContainer" class="booking-container"></div>
-
-
-
-
-
-
     </section>
 
-
-      <section id="success" class="view-content">
+    <section id="success" class="view-content">
         <header>
-          <h2>Receipt</h2>
+            <h2>Receipt</h2>
         </header>
         <div id="successContainer" class="success-container"></div>
-
-      </section>
+    </section>
 
     <section id="create-movie" class="view-content">
         <header>
             <h2>Create Movie</h2>
         </header>
         <div id="createMovieContainer" class="create-movie-container"></div>
-
     </section>
 
     <section id="admin" class="view-content">
         <header>
             <h2>Admin dashboard</h2>
         </header>
-        <div id="adminContainer" class="admin-container"></div>
-
+        <div id="adminContainer" class="admin-container">
+            <div id="moviesTableContainer" class="movies-table">
+            </div>
+        </div>
+        <script type="module" src="js/admin.js"></script>
     </section>
 
     <section id="revenue" class="view-content">
         <div id="revenueContainer" class="revenue-container"></div>
-
     </section>
 </main>
 
