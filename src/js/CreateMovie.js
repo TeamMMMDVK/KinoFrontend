@@ -1,3 +1,8 @@
+
+/*
+const createMovieContainer peger på en div ude i index.html med id "createMovieContainer"
+const postMovieEndpointUrl er det endpoint som vi gerne vil kontakte i vores backend for at poste vores objekt fra frontend.
+ */
 const createMovieContainer = document.getElementById("createMovieContainer");
 const postMovieEndpointUrl = "http://localhost:8080/api/v1/movie/create-movie";
 
