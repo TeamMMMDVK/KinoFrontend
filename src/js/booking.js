@@ -12,61 +12,60 @@ const bookingUrl = `http://localhost:8080/api/v1/reservation`;
 
 console.log(showId)
 
-function createScreen(){
-    const screenDiv = document.createElement("div")
-    screenDiv.id = "screen"
 
-    const screenLabel = document.createElement("p")
-    screenLabel.id = "screen-label"
-    screenLabel.innerText = "SCREEN"
-
-    bookingContainer.appendChild(screenLabel)
-    bookingContainer.appendChild(screenDiv)
-
-}
 
 async function fetchSeatsInTheater() {
-  const response = await fetch(fetchSeatsUrl);
-  const seats = await response.json()
-    createScreen()
+    const response = await fetch(fetchSeatsUrl);
+    const seats = await response.json();
 
+    const seatContainer = document.createElement("div");
+    seatContainer.id = "seatContainer";
 
-  let lastRow = 0;
-  seats.forEach(seat => {
-    if (seat.seatRow !== lastRow) {
-      lastRow = seat.seatRow;
-      const rowDiv = document.createElement("div");
-      rowDiv.classList.add("seat-row");
+    const screenDiv = document.createElement("div");
+    screenDiv.id = "screen";
 
-      const rowNumber = document.createElement("div");
-      rowNumber.classList.add("row-number");
-      rowNumber.innerHTML = `${seat.seatRow}`;
-      rowDiv.appendChild(rowNumber);
+    const screenLabel = document.createElement("p");
+    screenLabel.id = "screen-label";
+    screenLabel.innerText = "SCREEN";
 
-      bookingContainer.appendChild(rowDiv);
-    }
+    screenDiv.appendChild(screenLabel);
+    seatContainer.appendChild(screenDiv);
 
-    const seatDiv = document.createElement("div");
-    seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`); //TODO fix hardcoded value
+    let lastRow = 0;
 
+    seats.forEach(seat => {
+        if (seat.seatRow !== lastRow) {
+            lastRow = seat.seatRow;
 
-    if (seat.blocked) {
-      seatDiv.classList.add("blocked");
-    } else {
-      seatDiv.classList.add("available");
+            const rowDiv = document.createElement("div");
+            rowDiv.classList.add("seat-row");
 
-    }
+            const rowNumber = document.createElement("div");
+            rowNumber.classList.add("row-number");
+            rowNumber.innerText = `${seat.seatRow}`;
 
-    seatDiv.addEventListener("click", toggleSelected);
+            rowDiv.appendChild(rowNumber);
+            seatContainer.appendChild(rowDiv);
+        }
 
+        const seatDiv = document.createElement("div");
+        seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`);
 
+        if (seat.blocked) {
+            seatDiv.classList.add("blocked");
+        } else {
+            seatDiv.classList.add("available");
+        }
 
-          bookingContainer.lastChild.appendChild(seatDiv);
-  });
-  fetchBookedSeats()
+        seatDiv.addEventListener("click", toggleSelected);
 
+        seatContainer.lastChild.appendChild(seatDiv);
+    });
 
+    bookingContainer.appendChild(seatContainer);
+    fetchBookedSeats();
 }
+
 
 
 function toggleSelected() {
