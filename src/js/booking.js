@@ -49,7 +49,7 @@ async function fetchSeatsInTheater() {
         }
 
         const seatDiv = document.createElement("div");
-        seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`);
+        seatDiv.classList.add("seat", `row-${seat.seatRow}`, `col-${seat.seatNumber}`, `seatId-${seat.seatID}`, `seatType-${1}`);
 
         if (seat.blocked) {
             seatDiv.classList.add("blocked");
@@ -133,7 +133,7 @@ function sendBooking(event) { //event param contains info about click event. Its
            localStorage.setItem("successObj",JSON.stringify(data))
             location.hash = "#success"
             console.log("success reloading")
-            window.location.reload()
+
         })
 }
 
