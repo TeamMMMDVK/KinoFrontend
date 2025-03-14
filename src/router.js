@@ -24,6 +24,24 @@ function updateNavbarActiveLink(view) {
   const navbarLink = document.querySelector(`a.view-link[href="${view}"]`); // Get navbar element with href equal to view
   if (navbarLink) {
     navbarLink.classList.add("active"); // Add active class to the navbar element
+    loadSectionScript(view)
+  }
+}
+function loadSectionScript(view) {
+  const scriptMapping = {
+    "#home": "js/home.js",
+    "#show": "js/show.js",
+    "#booking": "js/booking.js",
+    "#success": "js/success.js",
+    "#create-movie": "js/CreateMovie.js",
+    "#revenue": "js/revenue.js",
+    "#admin": "js/admin.js",
+  };
+
+  if (scriptMapping[view]) {
+    import(`./${scriptMapping[view]}`)
+        .then(() => console.log(`Loaded script for ${view}`))
+        .catch(err => console.error(`Error loading script for ${view}:`, err));
   }
 }
 
