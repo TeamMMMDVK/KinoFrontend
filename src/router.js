@@ -10,6 +10,7 @@ function handleViewChange() {
 
   if (location.hash) {
     defaultView = location.hash; // extract the hash from the URL
+    loadSectionScript(defaultView)
   }
 
   hideAllViews();
@@ -24,7 +25,7 @@ function updateNavbarActiveLink(view) {
   const navbarLink = document.querySelector(`a.view-link[href="${view}"]`); // Get navbar element with href equal to view
   if (navbarLink) {
     navbarLink.classList.add("active"); // Add active class to the navbar element
-    loadSectionScript(view)
+
   }
 }
 function loadSectionScript(view) {
