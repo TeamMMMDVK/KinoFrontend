@@ -34,6 +34,8 @@ function loadSectionScript(view) {
     "#booking": "js/booking.js",
     "#success": "js/success.js",
     "#create-movie": "js/CreateMovie.js",
+    "#revenue": "js/revenue.js",
+    "#admin": "js/admin.js",
   };
 
   if (scriptMapping[view]) {
