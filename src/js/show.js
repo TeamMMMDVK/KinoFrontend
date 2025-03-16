@@ -1,3 +1,13 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/show.css") // CSS fil indlæses når denne JS-fil kører
+
 //console.log("Her er vi i Show script")
 let movieIDFromStorage = localStorage.getItem("movieID")
 let startDateFromStorage = sessionStorage.getItem("startDate");
@@ -10,7 +20,7 @@ let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}
 
 const showContainer = document.getElementById("showContainer")
 const movieDetails = document.getElementById("movieDetails")
-const btnNextPeriod = document.getElementById("more-shows")
+
 const role = localStorage.getItem("Role")
 
 function addShowButton(){

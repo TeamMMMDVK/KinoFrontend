@@ -34,7 +34,7 @@ function loadSectionScript(view) {
     "#show": "js/show.js",
     "#booking": "js/booking.js",
     "#success": "js/success.js",
-    "#create-movie": "js/CreateMovie.js",
+    "#create-movie": "js/createmovie.js",
     "#revenue": "js/revenue.js",
     "#admin": "js/admin.js",
     "#create-show": "js/createShow.js"

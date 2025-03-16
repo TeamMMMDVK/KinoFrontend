@@ -1,3 +1,14 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/home.css") // CSS fil indlæses når denne JS-fil kører
+
+
 getDateRangeForEndpointUrl()
 let todayFormatted = sessionStorage.getItem("startDate")
 let futureFormatted = sessionStorage.getItem("endDate")
@@ -10,7 +21,7 @@ let navigationContainer = document.getElementById("mainNavigation")
 console.log(navigationContainer)
 
 function getDateRangeForEndpointUrl() {
-    let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og 7 dage ud i fremtiden.
+    let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og en uge ud i fremtiden.
     let futureDate = new Date();
 
     futureDate.setDate(today.getDate() + 6);

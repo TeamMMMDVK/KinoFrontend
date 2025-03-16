@@ -1,3 +1,14 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/createmovie.css") // CSS fil indlæses når denne JS-fil kører
+
+
 const createMovieContainer = document.getElementById("createMovieContainer");
 const postMovieEndpointUrl = "http://localhost:8080/api/v1/movie/create-movie";
 
