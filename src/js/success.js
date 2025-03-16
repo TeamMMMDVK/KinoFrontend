@@ -1,3 +1,14 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/success.css") // CSS fil indlæses når denne JS-fil kører
+
+
 const reservationInfo = JSON.parse(localStorage.getItem("successObj"))
 const successContainer = document.getElementById("successContainer")
 

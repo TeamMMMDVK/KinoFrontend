@@ -1,3 +1,14 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/createmovie.css") // CSS fil indlæses når denne JS-fil kører
+
+
 const createMovieContainer = document.getElementById("createMovieContainer");
 const postMovieEndpointUrl = "http://localhost:8080/api/v1/movie/create-movie";
 
@@ -81,7 +92,7 @@ function presentMovieForm() {
         </div>
 
         <!-- Submit button should be inside the form -->
-        <button type="submit" id="submitButton">Submit</button> 
+        <button type="submit" id="submitButton" class="button">Submit</button> 
     </form>
 </div>`;
 

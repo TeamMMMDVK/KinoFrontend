@@ -1,16 +1,29 @@
-//console.log("Her er vi i Show script")
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/show.css") // CSS fil indlæses når denne JS-fil kører
+
+console.log("Her er vi i Show script")
 let movieIDFromStorage = localStorage.getItem("movieID")
 let startDateFromStorage = sessionStorage.getItem("startDate");
 let endDate = sessionStorage.getItem("endDate");
-//console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
+
 
 let redirect = "#booking"
-const url = `http://localhost:8080/api/v1/show/movie/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
+const url = `http://localhost:8080/api/v1/show/movie/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}`
 let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}`
+
+console.log("startdate", startDateFromStorage)
+console.log("enddate", endDate)
 
 const showContainer = document.getElementById("showContainer")
 const movieDetails = document.getElementById("movieDetails")
-const btnNextPeriod = document.getElementById("more-shows")
+
 const role = localStorage.getItem("Role")
 
 function addShowButton(){
@@ -20,7 +33,7 @@ function addShowButton(){
         let showButtonDiv = document.createElement("div");
 
         let addShowButton = document.createElement("button");
-        addShowButton.classList.add("show-time");
+        addShowButton.classList.add("button");
         addShowButton.href = "#create-show"
         addShowButton.innerHTML= "Add new show";
         addShowButton.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"
@@ -71,7 +84,7 @@ function presentShows(shows) {
 
         groupedShows[date].forEach(show => {
             let timeButton = document.createElement("button");
-            timeButton.classList.add("show-time");
+            timeButton.classList.add("button");
             timeButton.innerHTML = show.time;
             timeButton.addEventListener("click", () => {
                 localStorage.setItem("showID", show.showID);
@@ -121,12 +134,14 @@ function presentMovie(movie) {
 
     let trailerLink = document.createElement("a");
     trailerLink.href = movie.trailerLink;
-    trailerLink.innerHTML = "Watch Trailer";
+    trailerLink.classList.add("button")
+    trailerLink.innerHTML = "Trailer";
     trailerLink.target = "_blank";
 
     let reviewLinks = document.createElement("a");
     reviewLinks.href = movie.reviewLink;
-    reviewLinks.innerHTML = "Read Reviews";
+    reviewLinks.classList.add("button")
+    reviewLinks.innerHTML = "Reviews";
     reviewLinks.target = "_blank";
 
     movieDiv.appendChild(moviePicture);

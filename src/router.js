@@ -7,7 +7,12 @@ function initializeViewNavigation() {
 
 function handleViewChange() {
   let defaultView = "#home"; // default view
-
+  //For at undgå, at der ikke er # i url fra starten (og dermed blank side), tjekker vi med denne
+  //if statement og sætter til default view
+  if (!location.hash) {
+    location.hash = defaultView // Sætter hash til #home, hvis den mangler
+  }
+  //location.hash tjekker om der findes # i url og henter dette
   if (location.hash) {
     defaultView = location.hash; // extract the hash from the URL
     loadSectionScript(defaultView)
@@ -34,7 +39,7 @@ function loadSectionScript(view) {
     "#show": "js/show.js",
     "#booking": "js/booking.js",
     "#success": "js/success.js",
-    "#create-movie": "js/CreateMovie.js",
+    "#create-movie": "js/createmovie.js",
     "#revenue": "js/revenue.js",
     "#admin": "js/admin.js",
     "#create-show": "js/createShow.js"

@@ -52,11 +52,14 @@ async function buildTableForAllMovies(movies) {
         } )
         movieShowsLink.innerHTML = "All shows";
         movieShowsLink.classList.add("view-link");
+        movieShowsLink.classList.add("button")
         cell4.appendChild(movieShowsLink)
         cell4.appendChild(document.createElement("br"))
 
         let addShowLink = document.createElement("a");
         addShowLink.href = "#create-show";
+        addShowLink.classList.add("button" +
+            "")
         addShowLink.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"
             localStorage.setItem("movieID", movie.movieID)
         } )
@@ -71,6 +74,7 @@ async function buildTableForAllMovies(movies) {
         let cell5 = document.createElement("td");
         let updateMovieLink = document.createElement("a");
         updateMovieLink.href = "#update-movie";
+        updateMovieLink.classList.add("button")
         updateMovieLink.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"
             localStorage.setItem("movieID", movie.movieID)
         } )
@@ -87,6 +91,7 @@ async function buildTableForAllMovies(movies) {
         } )
         deleteMovieLink.innerHTML = "Delete";
         deleteMovieLink.classList.add("view-link");
+        deleteMovieLink.classList.add("button")
         cell6.appendChild(deleteMovieLink)
         row.appendChild(cell6);
         tableMovies.appendChild(row);

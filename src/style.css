@@ -1,11 +1,23 @@
 /* ---------- Global Styling ---------- */
+/* === Farvevariabler som kan kaldes i alle css=== */
+:root {
+  --seat-color: #5f7272;
+  --form-color: #81af8c;
+  --background-color-header: #748067;
+  --background-color-content: #b5bdad;
+  --button-color: #496951;
+  --button-hoover: #af9681;
+  --text-color: black;  /* Definerer sort som standard tekstfarve */
+
+}
+
 body,
 html {
   height: 100%;
   padding: 0;
   margin: 0;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
-  background-color: #f9f9f9;
+  background-color: var(--background-color-content);
   color: #222;
   line-height: 1.6;
 }
@@ -20,7 +32,7 @@ nav {
   z-index: 2;
   left: 0;
   right: 0;
-  background: #ffffff;
+  background: var(--background-color-header);
   padding: 1em 0;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -67,74 +79,8 @@ h2 {
   }
 }
 
-/*---Nedenstående styles er til visning af aktuelle film - wf1---*/
-.movies-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.movie {
-  width: 300px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  text-align: center;
-  background: #f9f9f9;
-  border-radius: 8px;
-}
-
-.movie img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-/*---Nedenstående styles er til visning af film med tider - wf2---*/
-
-.movie-page {
-  display: flex; /* Gør moviePage til en flex-container */
-  justify-content: space-between; /* Giver afstand mellem elementerne */
-  align-items: flex-start; /* Sørger for at de starter fra toppen */
-  gap: 30px; /* Lidt luft mellem elementerne */
-  max-width: 1200px; /* Forhindrer for bredt layout */
-  margin: auto;
-}
-
-/* Filmens detaljer til venstre */
-.movie-details {
-  flex: 1; /* Fylder tilgængelig plads */
-  min-width: 300px; /* Sikrer plads */
-  max-width: 10%;
-}
-
-/* Shows-container til højre */
-.shows-container {
-  flex: 2; /* Fylder resten af pladsen */
-  max-width: 90%; /* Sikrer, at den ikke bliver for bred */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Dynamisk antal kolonner */
-  gap: 10px;
-  text-align: center;
-}
-
-.show-date {
-  font-size: 1.2em;
-  font-weight: bold;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #ccc;
-}
-
-.show-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  min-width: 120px; /* Sikrer ensartet bredde */
-}
-
-.show-time {
-  background-color: #007bff;
+.button {
+  background-color: var(--button-color);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -142,10 +88,13 @@ h2 {
   cursor: pointer;
   transition: background 0.3s ease;
   width: 80px;
+  margin: 5px;  /* Tilføjer mellemrum omkring knapperne */
+  display: inline-block; /* Sikrer korrekt placering ved siden af hinanden */
+  text-align: center;
 }
 
-.show-time:hover {
-  background-color: #0056b3;
+.button:hover {
+  background-color: var(--button-hoover);
 }
 
 table {

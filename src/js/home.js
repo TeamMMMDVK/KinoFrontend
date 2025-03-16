@@ -1,3 +1,14 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/home.css") // CSS fil indlæses når denne JS-fil kører
+
+
 getDateRangeForEndpointUrl()
 let todayFormatted = sessionStorage.getItem("startDate")
 let futureFormatted = sessionStorage.getItem("endDate")
@@ -10,15 +21,17 @@ let navigationContainer = document.getElementById("mainNavigation")
 console.log(navigationContainer)
 
 function getDateRangeForEndpointUrl() {
-    let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og 7 dage ud i fremtiden.
+    let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og en uge ud i fremtiden.
     let futureDate = new Date();
 
-    futureDate.setDate(today.getDate() + 6);
+    futureDate.setDate(today.getDate() + 7);
 
     let todayFormatted = today.toISOString().slice(0,-1);
     let futureFormatted = futureDate.toISOString().slice(0,-1); //Vi danner vores date objekter til rette format, så det kan accepteres som param. Slice -1 fjerner bare sidste char "Z"
     sessionStorage.setItem("startDate", todayFormatted); //Gemmer i session, så vi ikke gemmer DATETIME i længere tid end nødvendigt.
     sessionStorage.setItem("endDate", futureFormatted);
+    console.log("startdate sat i home", todayFormatted)
+    console.log("enddate sat i home", futureFormatted)
 }
 
 function adminLogin(){
@@ -62,16 +75,19 @@ function iterateMovieList(movies) {
 
         let trailerLink = document.createElement("a");
         trailerLink.href = data.trailerLink;
-        trailerLink.innerHTML = "Watch Trailer";
+        trailerLink.classList.add("button")
+        trailerLink.innerHTML = "Trailer";
         trailerLink.target = "_blank";
 
         let reviewLinks = document.createElement("a");
         reviewLinks.href = data.reviewLink;
-        reviewLinks.innerHTML = "Read Reviews";
+        reviewLinks.classList.add("button")
+        reviewLinks.innerHTML = "Reviews";
         reviewLinks.target = "_blank";
 
         let buyTicketButton = document.createElement("button")
         buyTicketButton.innerHTML = "Buy Ticket"
+        buyTicketButton.classList.add("button")
         buyTicketButton.href = redirect;
 
         buyTicketButton.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"

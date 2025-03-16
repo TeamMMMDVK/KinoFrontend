@@ -1,3 +1,14 @@
+function loadCSS(filename) {
+    let link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = filename;
+    document.head.appendChild(link);
+}
+
+loadCSS("css/booking.css") // CSS fil indlæses når denne JS-fil kører
+
+
 const showId = localStorage.getItem("showID");
 const theaterId = localStorage.getItem("theaterID");
 const bookingContainer = document.getElementById("bookingContainer");
@@ -155,7 +166,7 @@ function generateBookingInfoPanel() {
       <input type="text" name="customerName" id="customerName" required>
       <label for="customerEmail">Email</label>
       <input type="email" name="customerEmail" id="customerEmail" required>
-      <button id="book-button" type="submit">Book</button>
+      <button type="submit" class="button">Book</button>
     </form>
   `;
 
