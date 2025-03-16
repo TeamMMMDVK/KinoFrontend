@@ -8,15 +8,18 @@ function loadCSS(filename) {
 
 loadCSS("css/show.css") // CSS fil indlæses når denne JS-fil kører
 
-//console.log("Her er vi i Show script")
+console.log("Her er vi i Show script")
 let movieIDFromStorage = localStorage.getItem("movieID")
 let startDateFromStorage = sessionStorage.getItem("startDate");
 let endDate = sessionStorage.getItem("endDate");
-//console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
+
 
 let redirect = "#booking"
 const url = `http://localhost:8080/api/v1/show/movie/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}`
 let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}`
+
+console.log("startdate", startDateFromStorage)
+console.log("enddate", endDate)
 
 const showContainer = document.getElementById("showContainer")
 const movieDetails = document.getElementById("movieDetails")

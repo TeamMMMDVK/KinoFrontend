@@ -24,12 +24,14 @@ function getDateRangeForEndpointUrl() {
     let today = new Date(); //Vi danner url dynamisk med Date objekter, der kigger på dags dato og en uge ud i fremtiden.
     let futureDate = new Date();
 
-    futureDate.setDate(today.getDate() + 6);
+    futureDate.setDate(today.getDate() + 7);
 
     let todayFormatted = today.toISOString().slice(0,-1);
     let futureFormatted = futureDate.toISOString().slice(0,-1); //Vi danner vores date objekter til rette format, så det kan accepteres som param. Slice -1 fjerner bare sidste char "Z"
     sessionStorage.setItem("startDate", todayFormatted); //Gemmer i session, så vi ikke gemmer DATETIME i længere tid end nødvendigt.
     sessionStorage.setItem("endDate", futureFormatted);
+    console.log("startdate sat i home", todayFormatted)
+    console.log("enddate sat i home", futureFormatted)
 }
 
 function adminLogin(){
