@@ -15,7 +15,7 @@ let endDate = sessionStorage.getItem("endDate");
 //console.log("FROM SHOW:",movieIDFromStorage, startDateFromStorage)
 
 let redirect = "#booking"
-const url = `http://localhost:8080/api/v1/show/movie/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}` //TODO: Localstorage
+const url = `http://localhost:8080/api/v1/show/movie/${movieIDFromStorage}?startDate=${startDateFromStorage}&endDate=${endDate}`
 let fetchSpecificUrl = `http://localhost:8080/api/v1/movie/${movieIDFromStorage}`
 
 const showContainer = document.getElementById("showContainer")
