@@ -166,7 +166,7 @@ function generateBookingInfoPanel() {
       <input type="text" name="customerName" id="customerName" required>
       <label for="customerEmail">Email</label>
       <input type="email" name="customerEmail" id="customerEmail" required>
-      <button id="book-button" type="submit">Book</button>
+      <button type="submit" class="button">Book</button>
     </form>
   `;
 

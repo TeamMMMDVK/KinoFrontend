@@ -131,12 +131,14 @@ function presentMovie(movie) {
 
     let trailerLink = document.createElement("a");
     trailerLink.href = movie.trailerLink;
-    trailerLink.innerHTML = "Watch Trailer";
+    trailerLink.classList.add("button")
+    trailerLink.innerHTML = "Trailer";
     trailerLink.target = "_blank";
 
     let reviewLinks = document.createElement("a");
     reviewLinks.href = movie.reviewLink;
-    reviewLinks.innerHTML = "Read Reviews";
+    reviewLinks.classList.add("button")
+    reviewLinks.innerHTML = "Reviews";
     reviewLinks.target = "_blank";
 
     movieDiv.appendChild(moviePicture);

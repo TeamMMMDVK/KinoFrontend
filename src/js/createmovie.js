@@ -92,7 +92,7 @@ function presentMovieForm() {
         </div>
 
         <!-- Submit button should be inside the form -->
-        <button type="submit" id="submitButton">Submit</button> 
+        <button type="submit" id="submitButton" class="button">Submit</button> 
     </form>
 </div>`;
 

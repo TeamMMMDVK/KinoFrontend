@@ -1,11 +1,12 @@
 /* ---------- Global Styling ---------- */
 /* === Farvevariabler som kan kaldes i alle css=== */
 :root {
-  --primary-color: #A77464;
-  --secondary-color: #984F4A;
+  --seat-color: #5f7272;
+  --form-color: #81af8c;
   --background-color-header: #748067;
   --background-color-content: #b5bdad;
-  --button-color: #5f6955;
+  --button-color: #496951;
+  --button-hoover: #af9681;
   --text-color: black;  /* Definerer sort som standard tekstfarve */
 
 }
@@ -93,7 +94,7 @@ h2 {
 }
 
 .button:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--button-hoover);
 }
 
 table {
