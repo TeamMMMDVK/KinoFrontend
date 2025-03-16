@@ -73,16 +73,19 @@ function iterateMovieList(movies) {
 
         let trailerLink = document.createElement("a");
         trailerLink.href = data.trailerLink;
-        trailerLink.innerHTML = "Watch Trailer";
+        trailerLink.classList.add("button")
+        trailerLink.innerHTML = "Trailer";
         trailerLink.target = "_blank";
 
         let reviewLinks = document.createElement("a");
         reviewLinks.href = data.reviewLink;
-        reviewLinks.innerHTML = "Read Reviews";
+        reviewLinks.classList.add("button")
+        reviewLinks.innerHTML = "Reviews";
         reviewLinks.target = "_blank";
 
         let buyTicketButton = document.createElement("button")
         buyTicketButton.innerHTML = "Buy Ticket"
+        buyTicketButton.classList.add("button")
         buyTicketButton.href = redirect;
 
         buyTicketButton.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"

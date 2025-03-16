@@ -1,11 +1,22 @@
 /* ---------- Global Styling ---------- */
+/* === Farvevariabler som kan kaldes i alle css=== */
+:root {
+  --primary-color: #A77464;
+  --secondary-color: #984F4A;
+  --background-color-header: #748067;
+  --background-color-content: #b5bdad;
+  --button-color: #5f6955;
+  --text-color: black;  /* Definerer sort som standard tekstfarve */
+
+}
+
 body,
 html {
   height: 100%;
   padding: 0;
   margin: 0;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
-  background-color: #f9f9f9;
+  background-color: var(--background-color-content);
   color: #222;
   line-height: 1.6;
 }
@@ -20,7 +31,7 @@ nav {
   z-index: 2;
   left: 0;
   right: 0;
-  background: #ffffff;
+  background: var(--background-color-header);
   padding: 1em 0;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -67,8 +78,8 @@ h2 {
   }
 }
 
-.show-time {
-  background-color: #007bff;
+.button {
+  background-color: var(--button-color);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -76,10 +87,13 @@ h2 {
   cursor: pointer;
   transition: background 0.3s ease;
   width: 80px;
+  margin: 5px;  /* Tilføjer mellemrum omkring knapperne */
+  display: inline-block; /* Sikrer korrekt placering ved siden af hinanden */
+  text-align: center;
 }
 
-.show-time:hover {
-  background-color: #0056b3;
+.button:hover {
+  background-color: var(--secondary-color);
 }
 
 table {

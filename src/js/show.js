@@ -30,7 +30,7 @@ function addShowButton(){
         let showButtonDiv = document.createElement("div");
 
         let addShowButton = document.createElement("button");
-        addShowButton.classList.add("show-time");
+        addShowButton.classList.add("button");
         addShowButton.href = "#create-show"
         addShowButton.innerHTML= "Add new show";
         addShowButton.addEventListener('click', () => { //Vi skifter visning, når der trykkes på "buy ticket"
@@ -81,7 +81,7 @@ function presentShows(shows) {
 
         groupedShows[date].forEach(show => {
             let timeButton = document.createElement("button");
-            timeButton.classList.add("show-time");
+            timeButton.classList.add("button");
             timeButton.innerHTML = show.time;
             timeButton.addEventListener("click", () => {
                 localStorage.setItem("showID", show.showID);
