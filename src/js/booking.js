@@ -182,8 +182,28 @@ function calcSelectedSeats() {
     return totalSelectedSeats;
 }
 
+function generateHeadline() {
+    const getInfoLocalStorage = JSON.parse(localStorage.getItem("movieObj"))//Når et objekt er blevet gemt i localStorage
+    //bliver det lagret som en string i JSON format. Derfor skal det hentes og parses tilbage inden vi kan hente data fra det
+    const movieTitle = getInfoLocalStorage.title //Nu kan title hentes fra objektet
+    const showDate = localStorage.getItem("showDate")
+    const showStartTime = localStorage.getItem("showTime")
+    const totalSelectedSeats = document.getElementsByClassName("selected").length
+    console.log(totalSelectedSeats)
+
+    console.log("showDate", showDate)
+    console.log("showTime", showStartTime)
+
+    let headerTitle = document.querySelector("#booking header h2")
+    if(headerTitle) {
+        headerTitle.innerText = `${movieTitle} - ${showDate} - ${showStartTime}`  //sætter overskriften til filmens titel, dato og valgt tid
+    }
+
+}
+
 fetchSeatsInTheater()
 generateBookingInfoPanel()
+generateHeadline()
 
 
 
