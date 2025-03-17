@@ -63,7 +63,7 @@ function presentShows(shows) {
         if (!groupedShows[date]) { //Hvis datoen ikke findes i vores groupedShows objekt, så oprettes et tomt array med datoen
             groupedShows[date] = [];
         }
-        groupedShows[date].push({time, showID: show.showID, theaterID: show.theaterID });//Tilføjer tidspunkt, showID og theaterID til datoens array
+        groupedShows[date].push({time, date, showID: show.showID, theaterID: show.theaterID });//Tilføjer tidspunkt, showID og theaterID til datoens array
     });
 
     showContainer.innerHTML = ""; // Ryd tidligere indhold i vores showContainer felt i html
@@ -90,6 +90,7 @@ function presentShows(shows) {
                 localStorage.setItem("showID", show.showID);
                 localStorage.setItem("theaterID", show.theaterID)
                 localStorage.setItem("showTime", show.time)
+                localStorage.setItem("showDate", show.date)
                 location.hash = redirect
                 window.location.reload()
             });

@@ -26,7 +26,7 @@
     flex: 2; /* Fylder resten af pladsen */
     max-width: 90%; /* Sikrer, at den ikke bliver for bred */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Dynamisk antal kolonner */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Dynamisk antal kolonner */
     gap: 10px;
     text-align: center;
 }
